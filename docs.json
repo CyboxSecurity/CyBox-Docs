@@ -16,5 +16,10 @@
     ]
   },
   "logo": "/images/CyboxLogo500noBG.png",
-  "favicon": "/images/favicon.png"
+  "favicon": "/images/favicon.png",
+  "background": {
+    "color": {
+      "light": "#ffffff"
+    }
+  }
 }
