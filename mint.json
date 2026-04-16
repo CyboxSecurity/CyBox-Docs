@@ -16,15 +16,26 @@
     }
   },
   "topbarLinks": [
-    { "name": "cybox.ai", "url": "https://cybox.ai" }
+    {
+      "name": "cybox.ai",
+      "url": "https://cybox.ai"
+    }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
     "url": "https://app.cybox.ai"
   },
   "anchors": [
-    { "name": "Dashboard", "icon": "chart-line", "url": "https://app.cybox.ai" },
-    { "name": "Support", "icon": "envelope", "url": "mailto:support@cybox.ai" }
+    {
+      "name": "Dashboard",
+      "icon": "chart-line",
+      "url": "https://app.cybox.ai"
+    },
+    {
+      "name": "Support",
+      "icon": "envelope",
+      "url": "mailto:support@cybox.ai"
+    }
   ],
   "navigation": [
     {
