@@ -8,21 +8,32 @@
     "dark": "#020617"
   },
   "logo": {
-    "dark": "/logo/dark.png",
-    "light": "/logo/light.png",
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg",
     "href": "/getting-started/overview"
   },
   "favicon": "/favicon.png",
   "topbarLinks": [
-    { "name": "cybox.ai", "url": "https://cybox.ai" }
+    {
+      "name": "cybox.ai",
+      "url": "https://cybox.ai"
+    }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
     "url": "https://app.cybox.ai"
   },
   "anchors": [
-    { "name": "Dashboard", "icon": "chart-line", "url": "https://app.cybox.ai" },
-    { "name": "Support", "icon": "envelope", "url": "mailto:support@cybox.ai" }
+    {
+      "name": "Dashboard",
+      "icon": "chart-line",
+      "url": "https://app.cybox.ai"
+    },
+    {
+      "name": "Support",
+      "icon": "envelope",
+      "url": "mailto:support@cybox.ai"
+    }
   ],
   "navigation": {
     "groups": [
@@ -79,7 +90,10 @@
     ]
   },
   "redirects": [
-    { "source": "/", "destination": "/getting-started/overview" }
+    {
+      "source": "/",
+      "destination": "/getting-started/overview"
+    }
   ],
   "footerSocials": {
     "linkedin": "https://linkedin.com/company/cybox-security"

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="32" viewBox="0 0 200 32">
+  <image xlink:href="/logo/icon.png" x="0" y="0" width="32" height="32"/>
+  <text x="42" y="21" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#ffffff" letter-spacing="-0.2">CyBox Security</text>
+</svg>
