@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "CyBox",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
     "primary": "#00D4FF",
     "light": "#00D4FF",
@@ -16,15 +16,26 @@
     }
   },
   "topbarLinks": [
-    { "name": "cybox.ai", "url": "https://cybox.ai" }
+    {
+      "name": "cybox.ai",
+      "url": "https://cybox.ai"
+    }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
     "url": "https://app.cybox.ai"
   },
   "anchors": [
-    { "name": "Dashboard", "icon": "chart-line", "url": "https://app.cybox.ai" },
-    { "name": "Support", "icon": "envelope", "url": "mailto:support@cybox.ai" }
+    {
+      "name": "Dashboard",
+      "icon": "chart-line",
+      "url": "https://app.cybox.ai"
+    },
+    {
+      "name": "Support",
+      "icon": "envelope",
+      "url": "mailto:support@cybox.ai"
+    }
   ],
   "navigation": [
     {
