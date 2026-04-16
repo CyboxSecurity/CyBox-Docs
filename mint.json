@@ -41,7 +41,6 @@
     {
       "group": "Getting Started",
       "pages": [
-        "introduction",
         "getting-started/overview",
         "getting-started/quickstart",
         "getting-started/invite-your-team"
@@ -92,5 +91,11 @@
   ],
   "footerSocials": {
     "linkedin": "https://linkedin.com/company/cybox-security"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/getting-started/overview"
+    }
+  ]
 }
