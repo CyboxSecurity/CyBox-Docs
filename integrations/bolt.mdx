@@ -1,0 +1,57 @@
+---
+title: "Bolt"
+description: "Connect Bolt to CyBox to automatically discover, monitor, and scan apps built with Bolt (bolt.new)."
+---
+
+## Overview
+
+Bolt (bolt.new) is an AI-powered development environment that generates and deploys full-stack web apps from a prompt. CyBox connects to Bolt to automatically discover every deployed app, scan it for live exposure issues, and keep it visible alongside your other assets.
+
+---
+
+## What CyBox monitors
+
+Once connected, CyBox continuously tracks every app deployed through your Bolt account:
+
+- **Live exposure validation** — active scanning for exposed sensitive paths, missing security headers, open redirects, and information disclosure
+- **Posture checks** — HTTPS enforcement, cookie flags, CORS misconfigurations
+- **Asset inventory** — every Bolt deployment visible in one place alongside your repositories and other cloud assets
+- **Shadow app detection** — apps spun up by teammates that may have bypassed a formal security review
+
+---
+
+## Setup
+
+<Steps>
+  <Step title="Go to Integrations">
+    In the CyBox dashboard, go to **Integrations** in the sidebar.
+  </Step>
+  <Step title="Find Bolt">
+    Locate the **Bolt** card under the **External Exposure** section.
+  </Step>
+  <Step title="Click Connect">
+    Click the Bolt card and follow the authorization flow to connect your Bolt account to CyBox.
+  </Step>
+  <Step title="Discovery begins">
+    CyBox immediately syncs your Bolt deployments and adds them as URL assets. A posture scan runs automatically on each discovered app.
+  </Step>
+</Steps>
+
+---
+
+## What happens after connecting
+
+- All active Bolt deployments appear under **Assets** with source tagged as **Bolt**
+- Each asset is scanned automatically and findings appear in **Findings**
+- CyBox syncs every 6 hours — new deployments are discovered and added automatically
+- Removed deployments are marked **Inactive** — their findings are retained for audit purposes
+
+---
+
+## Suggested rollout
+
+Connect Bolt as soon as your team starts using it for anything beyond local prototypes. Apps generated and published with Bolt are immediately public — getting them into CyBox early ensures no exposure goes unmonitored.
+
+<Note>
+Bolt apps deployed to bolt.new subdomains are discovered and scanned automatically. You don't need a custom domain to get coverage.
+</Note>
