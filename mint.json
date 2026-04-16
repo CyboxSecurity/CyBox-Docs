@@ -2,106 +2,83 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "CyBox",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#00D4FF",
-    "light": "#00D4FF",
-    "dark": "#0A0F1E",
+    "primary": "#3C83F6",
+    "light": "#3C83F6",
+    "dark": "#020617",
     "anchors": {
-      "from": "#00D4FF",
-      "to": "#0066FF"
+      "from": "#3C83F6",
+      "to": "#007BFF"
     }
   },
   "topbarLinks": [
-    {
-      "name": "Website",
-      "url": "https://cybox.ai"
-    }
+    { "name": "cybox.ai", "url": "https://cybox.ai" }
   ],
   "topbarCtaButton": {
-    "name": "Open App",
+    "name": "Get Started",
     "url": "https://app.cybox.ai"
   },
   "anchors": [
+    { "name": "Dashboard", "icon": "chart-line", "url": "https://app.cybox.ai" },
+    { "name": "Support", "icon": "envelope", "url": "mailto:support@cybox.ai" }
+  ],
+  "navigation": [
     {
-      "name": "Dashboard",
-      "icon": "chart-line",
-      "url": "https://app.cybox.ai"
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "getting-started/overview",
+        "getting-started/quickstart",
+        "getting-started/invite-your-team"
+      ]
     },
     {
-      "name": "Request a Demo",
-      "icon": "sparkles",
-      "url": "https://cybox.ai"
+      "group": "Platform",
+      "pages": [
+        "platform/what-is-cybox",
+        "platform/how-cybox-works",
+        "platform/security-model"
+      ]
     },
     {
-      "name": "Support",
-      "icon": "envelope",
-      "url": "mailto:support@cybox.ai"
+      "group": "Core Features",
+      "pages": [
+        "features/pr-firewall",
+        "features/shadow-apps",
+        "features/findings-and-posture",
+        "features/autofix",
+        "features/live-exposure-validation"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/connect-a-repository",
+        "guides/add-a-domain-or-website",
+        "guides/run-your-first-scan",
+        "guides/review-findings",
+        "guides/use-autofix",
+        "guides/review-pr-firewall-events"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/github",
+        "integrations/domain-monitoring"
+      ]
+    },
+    {
+      "group": "FAQ",
+      "pages": [
+        "faq/general"
+      ]
     }
   ],
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "CyBox Docs",
-        "groups": [
-          {
-            "group": "Start Here",
-            "pages": [
-              "index",
-              "getting-started/overview",
-              "getting-started/quickstart",
-              "getting-started/invite-your-team"
-            ]
-          },
-          {
-            "group": "Platform",
-            "pages": [
-              "platform/what-is-cybox",
-              "platform/how-cybox-works",
-              "platform/security-model"
-            ]
-          },
-          {
-            "group": "Core Features",
-            "pages": [
-              "features/pr-firewall",
-              "features/shadow-apps",
-              "features/findings-and-posture",
-              "features/autofix",
-              "features/live-exposure-validation"
-            ]
-          },
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/connect-a-repository",
-              "guides/add-a-domain-or-website",
-              "guides/run-your-first-scan",
-              "guides/review-findings",
-              "guides/use-autofix",
-              "guides/review-pr-firewall-events"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/github",
-              "integrations/domain-monitoring"
-            ]
-          },
-          {
-            "group": "FAQ",
-            "pages": [
-              "faq/general"
-            ]
-          }
-        ]
-      }
-    ]
-  },
   "footerSocials": {
     "linkedin": "https://linkedin.com/company/cybox-security"
   }
