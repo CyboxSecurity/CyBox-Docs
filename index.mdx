@@ -1,21 +1,51 @@
 ---
 title: "CyBox Documentation"
-description: "Welcome to CyBox — the security control layer for AI-generated code."
+description: "CyBox is the control layer for AI-generated code, risky pull requests, and hidden software exposure."
 ---
 
-CyBox helps engineering and security teams **stay in control of what AI coding tools produce** — finding vulnerabilities, fixing them automatically, and blocking risky code before it reaches production.
+# Welcome to CyBox
+
+CyBox helps security and engineering teams stay in control of fast-moving software.
+
+It finds what was built, highlights what matters, helps fix it faster, and puts enforcement directly in the pull request flow before risky changes reach production.
 
 <CardGroup cols={2}>
   <Card title="Quickstart" icon="rocket" href="/getting-started/quickstart">
-    Connect your first repo and run a scan in minutes.
+    Connect your first asset and see results in minutes.
   </Card>
   <Card title="PR Firewall" icon="shield" href="/features/pr-firewall">
-    Block risky AI-generated code before it merges.
+    Review, warn on, or block risky pull requests before merge.
   </Card>
-  <Card title="Shadow Apps" icon="eye" href="/features/shadow-apps">
-    Discover deployed apps your team may not know about.
+  <Card title="Shadow Apps" icon="globe" href="/features/shadow-apps">
+    Discover external apps, previews, and websites your team may not be tracking.
   </Card>
-  <Card title="AutoFix" icon="wrench" href="/features/autofix">
-    Auto-generate fix PRs for detected vulnerabilities.
+  <Card title="AutoFix" icon="wand-magic-sparkles" href="/features/autofix">
+    Turn eligible findings into fix pull requests with a few clicks.
   </Card>
 </CardGroup>
+
+## What you can do with CyBox
+
+<CardGroup cols={3}>
+  <Card title="See your exposure" icon="eye">
+    Understand risk across repositories, live websites, and fast-moving deployed assets.
+  </Card>
+  <Card title="Prioritize what matters" icon="triangle-exclamation">
+    Focus on introduced, exploitable, and high-impact issues instead of noisy lists.
+  </Card>
+  <Card title="Take action" icon="bolt">
+    Use guided remediation, AutoFix, and PR Firewall to move from finding to decision.
+  </Card>
+</CardGroup>
+
+## Suggested reading order
+
+1. Start with [Overview](/getting-started/overview)
+2. Follow the [Quickstart](/getting-started/quickstart)
+3. Understand [PR Firewall](/features/pr-firewall)
+4. Review [Findings & Security Posture](/features/findings-and-posture)
+5. Connect external assets with [Domain Monitoring](/integrations/domain-monitoring)
+
+<Tip>
+To make the docs feel more alive, add product screenshots under `/images` and place them at the top of the key pages like PR Firewall, Findings, and Shadow Apps.
+</Tip>

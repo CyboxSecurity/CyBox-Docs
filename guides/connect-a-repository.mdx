@@ -1,54 +1,31 @@
 ---
 title: "Connect a Repository"
-description: "Step-by-step guide to connecting a GitHub repository to CyBox."
+description: "Connect a GitHub repository to CyBox so scanning, findings, and PR Firewall can start working."
 ---
 
-## Prerequisites
+# Connect a repository
 
-- CyBox account with an active organization
-- GitHub account with admin access to the repository or organization
-- CyBox GitHub App installed (see [GitHub Integration](/integrations/github))
+## Step 1
+Open **Integrations → GitHub** and install the CyBox GitHub App.
 
----
+## Step 2
+Choose the repositories or organization scope you want to grant access to.
 
-## Steps
+## Step 3
+Return to **Assets** in CyBox and add the repository as a new asset.
 
-<Steps>
-  <Step title="Go to Assets">
-    In the CyBox dashboard, click **Assets** in the left sidebar.
-  </Step>
-  <Step title="Add Asset">
-    Click **Add Asset** in the top right, then select **Repository**.
-  </Step>
-  <Step title="Select Repository">
-    Choose from the list of repositories available through your connected GitHub installation. If the repo isn't listed, check that the CyBox GitHub App has access to it.
-  </Step>
-  <Step title="Save">
-    Click **Save**. CyBox will immediately queue a scan on the default branch.
-  </Step>
-</Steps>
+## Step 4
+Run a scan or wait for the initial scan to begin.
 
----
+## What happens next
 
-## After Connecting
+Once connected, CyBox can:
 
-- A full scan runs automatically on the default branch
-- Results appear in **Findings** within 1–5 minutes depending on repo size
-- Future pushes to the default branch trigger automatic re-scans
-- Pull requests trigger PR Firewall checks automatically
+- Scan the repository
+- Track findings over time
+- Evaluate pull requests with PR Firewall
+- Create supported AutoFix pull requests
 
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Repository not appearing in the list">
-    The CyBox GitHub App may not have access to that repository. Go to your GitHub organization settings → **Installed GitHub Apps → CyBox → Repository Access** and add the repository.
-  </Accordion>
-  <Accordion title="Scan stuck in 'Pending'">
-    Scans typically complete in 1–5 minutes. If a scan is pending for more than 10 minutes, try triggering a manual scan from the asset detail page. If the issue persists, contact support.
-  </Accordion>
-  <Accordion title="No findings after scan">
-    An empty findings result is valid — it means no issues were detected. Check the scan log on the asset detail page to confirm the scan completed successfully.
-  </Accordion>
-</AccordionGroup>
+<Tip>
+Start with one important repository first. It makes rollout cleaner and easier to explain internally.
+</Tip>

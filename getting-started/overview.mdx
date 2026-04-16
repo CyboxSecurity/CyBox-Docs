@@ -1,34 +1,51 @@
 ---
 title: "Overview"
-description: "Understand what CyBox does and how it fits into your development workflow."
+description: "What CyBox does, who it is for, and how it fits into your workflow."
 ---
 
-## What CyBox Does
+# Start here
 
-CyBox is a **Virtual Security Team for the AI Era**. It sits between your AI coding tools and your production environment, giving you continuous visibility and control over what gets built and deployed.
+CyBox is a security control layer for AI-generated code and fast-moving software exposure.
 
-### The Problem
-
-AI coding assistants (Copilot, Cursor, Claude, v0, Lovable, Bolt) generate code fast — but they also introduce vulnerabilities fast. Traditional scanners were not built for this pace or this pattern.
-
-### The CyBox Approach
-
-CyBox operates across three layers:
+It gives teams a simple operating model:
 
 <Steps>
-  <Step title="Discover">
-    Connect your GitHub repositories and deployed web assets. CyBox automatically inventories everything — code, dependencies, secrets, infrastructure, and live URLs.
+  <Step title="Connect assets">
+    Bring in repositories and public web assets so CyBox can understand what your team is building and exposing.
   </Step>
-  <Step title="Detect">
-    Every push and PR is scanned across six scanner types: SAST, SCA, Secrets, IaC, License, and DAST. Findings are deduplicated, prioritized, and mapped to the diff that introduced them.
+  <Step title="Surface risk">
+    CyBox scans code, dependencies, secrets, infrastructure definitions, and live internet-facing assets.
   </Step>
-  <Step title="Act">
-    CyBox generates fix PRs via AutoFix, enforces security gates via PR Firewall, and surfaces live vulnerabilities via DAST — so your team can act, not just review reports.
+  <Step title="Take action">
+    Teams triage findings, generate fix pull requests, and enforce policies directly in the pull request flow.
   </Step>
 </Steps>
 
-## Who CyBox Is For
+## Who CyBox is built for
 
-- **Engineering teams** building with AI coding tools who need automated security coverage without slowing down
-- **Security leads** who need visibility into AI-generated code risk across the org
-- **CTOs and founders** who need to ship fast without introducing silent risk
+- **Security teams** that need control without slowing development down
+- **Engineering leaders** that want fast feedback inside the normal delivery flow
+- **Founders and CTOs** that need visibility into what AI tools are producing across the company
+
+## What makes CyBox different
+
+Traditional security tools usually stop at detection.
+
+CyBox is built to help teams move from **finding** to **decision**:
+
+- It connects findings to the pull request that introduced them
+- It helps teams remediate faster with guided fixes and AutoFix
+- It monitors live assets, not just source code
+- It adds governance in the place where shipping decisions happen: the PR
+
+## The core CyBox workflow
+
+1. Connect GitHub and add your first repository
+2. Run a baseline scan
+3. Review findings by severity and asset
+4. Enable PR Firewall for merge-time control
+5. Add public websites or domains for live exposure validation
+
+<Info>
+A good first rollout is one critical repository, one public asset, and one team. That keeps setup simple and gives you quick value.
+</Info>

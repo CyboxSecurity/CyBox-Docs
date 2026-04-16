@@ -1,75 +1,65 @@
 ---
 title: "Quickstart"
-description: "Connect your first repository and get your first scan results in under 5 minutes."
+description: "Connect your first repository and get your first CyBox results quickly."
 ---
 
-## Prerequisites
+# Quickstart
 
-- A CyBox account ([sign up at app.cybox.ai](https://app.cybox.ai))
-- Admin access to a GitHub organization or repository
+This guide walks you through the fastest path to value.
 
----
+## Before you begin
 
-## Step 1: Connect GitHub
+- A CyBox account at [app.cybox.ai](https://app.cybox.ai)
+- Admin access to the GitHub organization or repositories you want to connect
 
-1. Go to **Integrations → GitHub** in the CyBox dashboard
+## 1. Install the GitHub App
+
+1. Open **Integrations → GitHub** in CyBox
 2. Click **Install GitHub App**
-3. Select the GitHub organization or repositories you want to connect
-4. Authorize the app — CyBox requests read access to code and write access to pull requests (for AutoFix and PR Firewall checks)
+3. Choose the repositories you want CyBox to access
+4. Complete the GitHub authorization flow
 
 <Note>
-CyBox never stores your source code. Scans run ephemerally and only findings are persisted.
+CyBox needs GitHub access for repository scanning, PR Firewall checks, and creating eligible AutoFix pull requests.
 </Note>
 
----
+## 2. Add your first repository
 
-## Step 2: Add Your First Repository
+1. Go to **Assets**
+2. Click **Add Asset**
+3. Select **Repository**
+4. Pick the repository from your connected GitHub installation
+5. Save
 
-1. Go to **Assets** in the sidebar
-2. Click **Add Asset → Repository**
-3. Select the repository from the connected GitHub org
-4. Click **Save**
+## 3. Run the first scan
 
----
+CyBox may start a scan automatically after the repository is connected. You can also trigger one manually from the asset page with **Scan Now**.
 
-## Step 3: Run Your First Scan
+## 4. Review results
 
-CyBox will automatically trigger a scan on the default branch after connecting.
+After the scan completes:
 
-You can also trigger manually:
-1. Open the asset from the Assets page
-2. Click **Scan Now**
+1. Open **Findings**
+2. Filter to **Critical** and **High** first
+3. Open a finding to review severity, evidence, remediation guidance, and AutoFix availability
 
-Scan time varies by repo size — typically **1–3 minutes** for most codebases.
+## 5. Turn on merge-time control
 
----
+Once baseline findings are understood, enable [PR Firewall](/features/pr-firewall) so new risky changes can be reviewed in pull requests before merge.
 
-## Step 4: Review Findings
-
-Once the scan completes:
-1. Go to **Findings** in the sidebar
-2. Filter by severity, type, or asset
-3. Click any finding to see full details, remediation guidance, and AutoFix availability
-
-<Tip>
-Start with **Critical** and **High** severity findings. Use the AutoFix button to generate a fix PR in one click.
-</Tip>
-
----
-
-## What's Next
+## Recommended next steps
 
 <CardGroup cols={2}>
-  <Card title="Invite Your Team" icon="users" href="/getting-started/invite-your-team">
-    Add teammates to your CyBox organization.
+  <Card title="Invite your team" icon="users" href="/getting-started/invite-your-team">
+    Give the right people visibility and access.
   </Card>
-  <Card title="Enable PR Firewall" icon="shield" href="/features/pr-firewall">
-    Block risky PRs before they merge.
+  <Card title="Review findings" icon="list-check" href="/guides/review-findings">
+    Learn the triage flow that works best in CyBox.
   </Card>
-  <Card title="Add a Domain" icon="globe" href="/guides/add-a-domain-or-website">
-    Scan live web assets with DAST.
+  <Card title="Use AutoFix" icon="wand-magic-sparkles" href="/guides/use-autofix">
+    See how eligible findings become fix pull requests.
   </Card>
-  <Card title="Review Findings" icon="list" href="/guides/review-findings">
-    Learn how to triage and act on findings.
+  <Card title="Add a domain or website" icon="globe" href="/guides/add-a-domain-or-website">
+    Start validating live exposure, not just code.
   </Card>
 </CardGroup>

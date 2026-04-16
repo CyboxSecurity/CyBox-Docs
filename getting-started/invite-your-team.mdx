@@ -1,31 +1,38 @@
 ---
 title: "Invite Your Team"
-description: "Add teammates to your CyBox organization so they can view findings, trigger scans, and collaborate on remediation."
+description: "Add teammates to your CyBox organization and choose the right access level for each one."
 ---
 
-## How to Invite Members
+# Invite your team
 
-1. Go to **Settings → Team** in the CyBox dashboard
+CyBox works best when security and engineering can look at the same findings and act from the same workflow.
+
+## Invite a teammate
+
+1. Open **Settings → Team**
 2. Click **Invite Member**
 3. Enter the teammate's email address
-4. Select their role (see below)
-5. Click **Send Invite**
+4. Choose a role
+5. Send the invite
 
-The invitee will receive an email with a link to join your CyBox organization.
+## Recommended roles
 
----
+| Role | Best for |
+|------|----------|
+| **Owner** | Organization setup, billing, integrations, and full control |
+| **Admin** | Day-to-day management of assets, scans, and members |
+| **Member** | Engineers and security users who review findings and use AutoFix |
+| **Viewer** | Stakeholders who need read-only visibility |
 
-## Roles
+## Rollout tip
 
-| Role | Access |
-|------|--------|
-| **Owner** | Full access — billing, settings, integrations, all assets |
-| **Admin** | Manage assets, scans, team members. No billing access |
-| **Member** | View findings, trigger scans, use AutoFix |
-| **Viewer** | Read-only access to findings and dashboard |
+A simple first setup is:
 
----
+- 1 Owner
+- 1 to 2 Admins
+- Engineers as Members
+- Leadership as Viewers
 
-## SSO
+## Identity and access
 
-Enterprise plans support SSO via WorkOS. Contact [support@cybox.ai](mailto:support@cybox.ai) to enable SSO for your organization.
+For advanced identity requirements such as SSO, domain-based access control, or enterprise review workflows, contact [support@cybox.ai](mailto:support@cybox.ai).

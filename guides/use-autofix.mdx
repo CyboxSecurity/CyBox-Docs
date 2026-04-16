@@ -1,60 +1,29 @@
 ---
 title: "Use AutoFix"
-description: "Generate fix pull requests for vulnerabilities in one click."
+description: "Generate, review, and merge an AutoFix pull request for a supported finding."
 ---
 
-## When to Use AutoFix
+# Use AutoFix
 
-Use AutoFix when:
-- A finding has the **AutoFix Available** badge
-- You want a fix PR generated without writing the code yourself
-- You're addressing multiple SCA (dependency) findings at once
+## Generate the fix
 
----
+1. Open a supported finding
+2. Click **AutoFix**
+3. Wait for CyBox to prepare the pull request
 
-## Steps
+## Review the PR
 
-<Steps>
-  <Step title="Open a Finding">
-    Go to **Findings** and click on any finding with the AutoFix badge.
-  </Step>
-  <Step title="Click AutoFix">
-    Click the **AutoFix** button in the finding detail panel.
-  </Step>
-  <Step title="Wait for PR">
-    CyBox generates the fix and opens a PR in your repository. This typically takes 15–30 seconds.
-  </Step>
-  <Step title="Review the PR in GitHub">
-    Click the PR link from the finding detail. Review the change, check the description, and merge if it looks correct.
-  </Step>
-</Steps>
+Check:
 
----
+- The code change itself
+- The commit and PR description
+- Whether the remediation matches the issue
+- Whether tests or validation are needed before merge
 
-## What the PR Looks Like
+## Merge or edit
 
-Every AutoFix PR includes:
-- **Branch**: `cybox/fix/{vuln-id}`
-- **Title**: Clear description of the fix (e.g. "fix: upgrade lodash to 4.17.21 (CVE-2021-23337)")
-- **Body**: The original finding details, what was changed, and any manual steps needed
+If the change looks good, merge it. If needed, edit the proposed code before merge.
 
----
-
-## After Merging
-
-Once the AutoFix PR is merged and the next scan runs:
-- The finding status changes to **Fixed**
-- The Security Risk Score updates accordingly
-- The fix is tracked in the finding history
-
----
-
-## Tips
-
-<Tip>
-For SCA findings, AutoFix upgrades the dependency to the minimum safe version — not the latest. This reduces the risk of breaking changes while resolving the CVE.
-</Tip>
-
-<Tip>
-If AutoFix is not available for a finding, check the **Remediation Guidance** section in the finding detail — it provides specific steps to fix manually.
-</Tip>
+<Warning>
+AutoFix accelerates remediation, but it does not replace engineering review.
+</Warning>

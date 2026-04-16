@@ -1,83 +1,50 @@
 ---
-title: "Live Exposure Validation (DAST)"
-description: "Actively test your deployed web assets for exploitable vulnerabilities — not just what's in the code, but what's reachable from the internet."
+title: "Live Exposure Validation"
+description: "Test public web assets from the outside so you can see what is actually exposed, not just what exists in source code."
 ---
 
-## What Is DAST?
+# Live Exposure Validation
 
-Dynamic Application Security Testing (DAST) actively probes your running web assets from the outside — the way an attacker would. Unlike SAST (which reads code), DAST validates whether vulnerabilities are actually exploitable in your live environment.
+Source code tells part of the story. Live exposure tells you what an attacker can actually reach.
 
-CyBox DAST is powered by **Nuclei v3** with a curated ruleset of 30+ checks optimized for modern web apps.
+CyBox uses live testing on public web assets to help teams validate real external exposure.
 
----
+## Why it matters
 
-## What Gets Tested
+A clean repository does not always mean a safe deployment.
 
-DAST scans run in two phases:
+Real-world issues often come from:
 
-### Fast Phase
-Runs immediately — high-confidence, low-noise checks:
+- Misconfigured headers
+- Exposed admin or debug paths
+- Leaked files or documentation endpoints
+- Unsafe redirects or cookie settings
+- Unexpected internet-facing behavior after deployment
 
-- Exposed sensitive files (`.env`, `.git`, `wp-config.php`, backup files)
-- Admin panel exposure
-- Default credentials on common services
-- Missing security headers (CSP, HSTS, X-Frame-Options, etc.)
-- HTTP to HTTPS redirect enforcement
-- Server information disclosure
+## What teams get from it
 
-### Extended Phase
-Deeper checks — runs after the fast phase:
+Live exposure validation helps teams:
 
-- Open redirects
-- Subdomain takeover indicators
-- Exposed API documentation (Swagger/OpenAPI endpoints)
-- Debug mode detection
-- Cross-origin misconfigurations
-- Cookie security flags (Secure, HttpOnly, SameSite)
-- Clickjacking vulnerability
+- Confirm whether risk is truly reachable
+- Focus remediation on assets that are publicly exposed
+- Compare code-level findings with what is visible in production
+- Investigate external-facing posture without leaving CyBox
 
----
+## Good candidates for live testing
 
-## Supported Asset Types
+- Main production websites
+- Customer-facing portals
+- Preview or staging environments exposed to the internet
+- Demo apps and pilot environments
 
-| Asset Type | DAST Supported |
-|-----------|---------------|
-| Public web URLs | ✅ Yes |
-| Vercel deployments | ✅ Yes |
-| Render services | ✅ Yes |
-| GitHub repositories | ❌ No (use SAST/SCA) |
+## Suggested workflow
 
----
-
-## DAST Finding Details
-
-Each DAST finding includes:
-
-- **What was found** — the specific issue detected
-- **Why it matters** — the risk and potential impact
-- **Evidence** — the HTTP request/response that triggered the finding
-- **Recommended action** — specific remediation steps
-- **Exploitability** — how easily this could be exploited in practice
-
----
-
-## Scheduling
-
-DAST scans run:
-- Automatically when a new URL asset is added
-- Every 24 hours on all active URL assets
-- On-demand from the asset detail page
-
----
-
-## Setup
-
-No special configuration required. Add a URL asset:
-
-1. Go to **Assets → Add Asset → Website / URL**
-2. Enter the target URL (must be publicly accessible)
-3. Click **Save** — DAST starts automatically
+1. Add a website or domain
+2. Run a live scan
+3. Review findings and evidence
+4. Fix issues or retire the asset
+5. Re-scan to validate the improvement
 
 <Warning>
-Only scan assets you own or have explicit permission to test. CyBox DAST sends active HTTP requests to the target URL.
+Only test assets your team owns or is explicitly authorized to assess.
 </Warning>

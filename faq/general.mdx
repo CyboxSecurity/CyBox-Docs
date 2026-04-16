@@ -1,48 +1,40 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about CyBox."
+description: "Common questions about CyBox, rollout, data handling, and product fit."
 ---
 
+# FAQ
+
 <AccordionGroup>
-
-  <Accordion title="What AI coding tools does CyBox detect?">
-    CyBox detects AI involvement from: GitHub Copilot, Cursor, Claude (Anthropic), Windsurf, v0 (Vercel), Lovable, Bolt, Devin, and any tool that uses standard AI co-author commit patterns. Detection is based on commit metadata, config file presence, PR labels, and bot-authored PR signals.
+  <Accordion title="Who is CyBox for?">
+    CyBox is built for security teams, engineering leaders, and fast-moving companies that want more control over AI-generated code and internet-facing software exposure.
   </Accordion>
 
-  <Accordion title="Does CyBox store my source code?">
-    No. Repositories are cloned into an isolated, ephemeral scan environment, scanned, and immediately deleted. CyBox only stores finding metadata — file paths, line numbers, rule IDs, severity, and code snippets relevant to each finding.
+  <Accordion title="Is CyBox only for AI-generated code?">
+    No. CyBox is especially valuable in AI-assisted development environments, but it is also useful for broader software security workflows across repositories, pull requests, and public assets.
   </Accordion>
 
-  <Accordion title="What languages and frameworks does CyBox support?">
-    CyBox supports all languages and frameworks supported by Semgrep (SAST) and OSV-Scanner (SCA). This includes JavaScript, TypeScript, Python, Go, Java, Ruby, PHP, C/C++, and more. IaC scanning covers Terraform, CloudFormation, Kubernetes, and Dockerfiles.
+  <Accordion title="What does PR Firewall actually do?">
+    PR Firewall evaluates the risk introduced by a pull request and returns a verdict so teams can decide whether to allow, review, or block the change before merge.
   </Accordion>
 
-  <Accordion title="How is CyBox different from Snyk or Semgrep?">
-    Snyk and Semgrep are scanners — they find issues and report them. CyBox goes further: it fixes issues automatically (AutoFix), enforces security gates at the PR level (PR Firewall), monitors live deployments (DAST + Shadow Apps), and is built specifically for AI-paced development. Think of it as a Virtual Security Team, not just another scanner.
+  <Accordion title="What is the difference between findings and posture?">
+    Findings are individual issues. Posture is the broader view of how risk is trending across assets, teams, and time.
   </Accordion>
 
-  <Accordion title="Can I use CyBox without GitHub?">
-    Currently CyBox requires GitHub for repository scanning, PR Firewall, and AutoFix. Standalone URL/DAST scanning works without GitHub. GitLab and Bitbucket support are on the roadmap.
+  <Accordion title="Does AutoFix replace developer review?">
+    No. AutoFix helps teams move faster, but engineers should still review the proposed change before merging it.
   </Accordion>
 
-  <Accordion title="How does PR Firewall handle false positives?">
-    If a Block verdict is based on a false positive finding, you can: (1) ignore the finding from the CyBox dashboard with reason "False Positive" — the next scan will re-evaluate the PR without that finding, or (2) if urgent, a GitHub repo admin can bypass branch protection and merge manually. CyBox logs all verdicts and overrides.
+  <Accordion title="Can CyBox help with public websites and external apps?">
+    Yes. CyBox can track public-facing assets and help teams validate live exposure, not just source code risk.
   </Accordion>
 
-  <Accordion title="Does CyBox scan private repositories?">
-    Yes. The CyBox GitHub App uses installation tokens scoped to the specific repositories you authorize. Private repositories are fully supported — scans run with the same permissions as any GitHub Actions workflow.
+  <Accordion title="Can we start small?">
+    Yes. A great first rollout is one repository, one public asset, and one team. That is usually enough to prove value quickly.
   </Accordion>
 
-  <Accordion title="What happens if I exceed my scan quota?">
-    On paid plans, CyBox will notify you when you're approaching your scan quota. Scans that exceed the quota are queued and processed in the next billing cycle, or you can upgrade your plan. Automatic PR Firewall scans are always prioritized.
+  <Accordion title="How do I get help or request something?">
+    Contact [support@cybox.ai](mailto:support@cybox.ai) for product help and [security@cybox.ai](mailto:security@cybox.ai) for security-related questions.
   </Accordion>
-
-  <Accordion title="Is there a free plan?">
-    Yes. CyBox offers a free tier for individual developers and small teams. See [cybox.ai/pricing](https://cybox.ai/pricing) for current plan details.
-  </Accordion>
-
-  <Accordion title="How do I report a bug or request a feature?">
-    Email [support@cybox.ai](mailto:support@cybox.ai) or use the in-app feedback button. For security disclosures, email [security@cybox.ai](mailto:security@cybox.ai).
-  </Accordion>
-
 </AccordionGroup>

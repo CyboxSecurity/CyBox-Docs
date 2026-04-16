@@ -1,87 +1,26 @@
 ---
 title: "GitHub Integration"
-description: "Connect CyBox to your GitHub organization to enable automated scanning, PR Firewall, and AutoFix."
+description: "Connect GitHub to CyBox for repository scanning, pull request governance, and supported AutoFix workflows."
 ---
 
-## What the GitHub Integration Enables
+# GitHub integration
 
-- **Automatic scanning** on every push to the default branch
-- **PR Firewall** — security check on every pull request
-- **AutoFix** — CyBox opens fix PRs directly in your repository
-- **Repository discovery** — see all repos in your org and add them as assets
+GitHub is the main integration for repository-based CyBox workflows.
 
----
+## What it enables
 
-## Install the CyBox GitHub App
+- Repository scanning
+- Pull request evaluation with PR Firewall
+- Supported AutoFix pull request creation
+- Shared visibility between security and engineering
 
-<Steps>
-  <Step title="Go to Integrations">
-    In the CyBox dashboard, go to **Integrations → GitHub**.
-  </Step>
-  <Step title="Click Install GitHub App">
-    Click **Install GitHub App**. You'll be redirected to GitHub.
-  </Step>
-  <Step title="Select Scope">
-    Choose whether to install on your entire GitHub organization or specific repositories.
+## Setup flow
 
-    <Tip>
-    Start with specific repositories if you want to test before rolling out org-wide.
-    </Tip>
-  </Step>
-  <Step title="Authorize">
-    Click **Install & Authorize**. You'll be redirected back to CyBox.
-  </Step>
-</Steps>
+1. Open **Integrations → GitHub**
+2. Install the CyBox GitHub App
+3. Choose repository scope
+4. Return to CyBox and add repositories as assets
 
----
+## Best practice
 
-## Permissions Requested
-
-| Permission | Level | Reason |
-|-----------|-------|--------|
-| **Contents** | Read | Clone repository for scanning |
-| **Pull Requests** | Read + Write | Post PR Firewall verdicts |
-| **Checks** | Write | Create GitHub Check runs |
-| **Metadata** | Read | List repositories |
-| **Commit Statuses** | Write | Post scan status |
-
-CyBox does **not** request write access to code, secrets, or repository settings.
-
----
-
-## Enable Branch Protection for PR Firewall
-
-For the PR Firewall **Block** verdict to prevent merging, you need to configure branch protection in GitHub:
-
-1. Go to your GitHub repository → **Settings → Branches**
-2. Click **Add branch protection rule**
-3. Set the branch name pattern to `main` (or your default branch)
-4. Enable **Require status checks to pass before merging**
-5. Search for and select **CyBox Security Scan**
-6. Save the rule
-
-<Note>
-Without branch protection, CyBox still posts the verdict as a GitHub Check — it just won't prevent merging. The verdict and findings are still visible on the PR.
-</Note>
-
----
-
-## Managing Repository Access
-
-To add or remove repositories from the CyBox GitHub App:
-
-1. Go to your GitHub organization → **Settings → Installed GitHub Apps**
-2. Find **CyBox** and click **Configure**
-3. Under **Repository Access**, add or remove repositories
-4. Changes take effect immediately
-
----
-
-## Uninstalling
-
-To disconnect GitHub from CyBox:
-
-1. Go to your GitHub org → **Settings → Installed GitHub Apps → CyBox → Configure**
-2. Click **Uninstall**
-
-This removes the GitHub App and stops all scan triggers. Existing findings in CyBox are retained.
+Start with a limited repository set, confirm the workflow with one engineering team, then expand.

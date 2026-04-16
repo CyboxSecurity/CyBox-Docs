@@ -1,81 +1,76 @@
 ---
 title: "How CyBox Works"
-description: "A technical overview of the CyBox scanning pipeline, verdict engine, and data model."
+description: "How CyBox moves from connected assets to findings, decisions, and action."
 ---
 
-## Architecture Overview
+# How CyBox works
 
-CyBox is a multi-tenant SaaS platform. Each customer organization is fully isolated — all data is scoped by organization with row-level security enforced at the database level.
+CyBox follows a simple operating flow: connect assets, scan for risk, prioritize findings, and enforce decisions where code gets merged.
 
----
+## End-to-end flow
 
-## The Scanning Pipeline
-
-When a scan is triggered (on push, PR, schedule, or manually), CyBox runs the following pipeline:
-
-```
-Asset (repo / URL)
-        │
-        ▼
-   ┌─────────────────────────────────┐
-   │         Scanner Orchestrator     │
-   │                                 │
-   │  SAST → SCA → Secrets → IaC    │
-   │  License → DAST (URL assets)   │
-   └─────────────────────────────────┘
-        │
-        ▼
-   Deduplication & Fingerprinting
-        │
-        ▼
-   Findings Store (per org, RLS)
-        │
-        ▼
-   Dashboard / PR Firewall / Alerts
+```text
+Assets connected
+   ↓
+Scans run across code and live assets
+   ↓
+Findings are deduplicated and prioritized
+   ↓
+PR Firewall evaluates introduced risk in pull requests
+   ↓
+Teams remediate manually or with AutoFix
 ```
 
-### Scan Triggers
+## 1. Assets are connected
 
-| Trigger | When |
-|---------|------|
-| **Push** | Every push to the default branch |
-| **Pull Request** | Every PR open/update (PR Firewall) |
-| **Scheduled** | Every 24 hours on connected assets |
-| **Manual** | On-demand from the dashboard |
+CyBox can work with repositories and public web assets.
 
----
+Typical starting point:
 
-## Findings Model
+- One or more GitHub repositories
+- One public website, preview deployment, or domain
 
-Every finding has:
-- **Fingerprint** — unique hash per asset + rule + location. Used for deduplication across scans.
-- **Severity** — Critical, High, Medium, Low, Informational
-- **Status** — Open, Fixed, Ignored
-- **Scanner** — SAST, SCA, Secrets, IaC, License, DAST
-- **Introduced by** — For PR scans: the diff that introduced the finding
+## 2. Scans run
 
-Findings persist across scans. A finding is marked **Fixed** only when it no longer appears in a subsequent scan.
+CyBox scans for:
 
----
+- Code issues
+- Dependency risk
+- Secrets exposure
+- Infrastructure misconfigurations
+- License risk
+- Live internet-facing issues on web assets
 
-## PR Firewall Verdict Engine
+## 3. Findings are normalized
 
-For every pull request, CyBox evaluates **introduced findings only** (diff-mapped) and produces one of three verdicts:
+CyBox groups repeated detections so the same issue is not treated as brand new on every scan.
 
-| Verdict | Condition |
-|---------|-----------|
-| **Allow** ✅ | No new findings, or only Low/Informational |
-| **Warn** ⚠️ | New Medium findings introduced |
-| **Block** 🚫 | New Critical or High findings introduced |
+Each finding keeps the context teams need to act:
 
-The verdict is posted as a GitHub Check on the PR. Block verdicts prevent merge (when branch protection is enabled).
+- Severity
+- Asset
+- Location or endpoint
+- Evidence
+- Suggested remediation
+- Status over time
 
----
+## 4. PR Firewall makes merge-time decisions
 
-## AutoFix Pipeline
+For pull requests, CyBox focuses on **introduced findings** rather than historic issues already sitting in the codebase.
 
-When AutoFix is triggered for a finding:
-1. CyBox sends the finding context + relevant code to the AI fix engine
-2. A fix is generated and validated
-3. A PR is opened on a `cybox/fix/{vuln-id}` branch
-4. The PR is linked back to the original finding in the dashboard
+That lets teams answer the most important question quickly:
+
+**Should this change be allowed, warned on, or blocked?**
+
+## 5. Teams remediate and move forward
+
+From the finding or review flow, teams can:
+
+- Assign or discuss remediation
+- Ignore with reason where appropriate
+- Generate an AutoFix PR for supported findings
+- Re-scan to confirm resolution
+
+<Note>
+CyBox is most effective when baseline issues are reviewed once, and PR Firewall is then used to keep new risk from slipping through.
+</Note>

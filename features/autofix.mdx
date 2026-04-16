@@ -1,78 +1,55 @@
 ---
 title: "AutoFix"
-description: "Auto-generate fix pull requests for detected vulnerabilities — one click, no manual remediation."
+description: "Generate fix pull requests for supported findings and speed up remediation without leaving the normal development flow."
 ---
 
-## What Is AutoFix?
+# AutoFix
 
-AutoFix generates a pull request that fixes a detected vulnerability directly in your repository. Instead of reading a finding, understanding it, researching a fix, and writing code manually — you click **Fix**, review the PR, and merge.
+AutoFix helps teams move from finding to fix faster.
 
----
+Instead of stopping at remediation advice, CyBox can generate a pull request for supported findings so engineers can review the proposed change and decide whether to merge it.
 
-## How It Works
+## What AutoFix is good for
+
+AutoFix is especially useful when:
+
+- The issue is clear and well-scoped
+- The remediation path is straightforward
+- Teams want a faster first draft of the fix
+- Security wants to reduce backlog without creating more manual work
+
+## The AutoFix flow
 
 <Steps>
-  <Step title="Finding Detected">
-    CyBox detects a vulnerability during a scan (SAST, SCA, Secrets, IaC, or License).
+  <Step title="Open the finding">
+    Review the issue, evidence, and remediation context.
   </Step>
-  <Step title="AutoFix Triggered">
-    You click **AutoFix** on the finding, or AutoFix is triggered automatically (if enabled).
+  <Step title="Generate the fix">
+    Trigger AutoFix for a supported finding.
   </Step>
-  <Step title="Fix Generated">
-    CyBox analyzes the finding context — the vulnerable code, the rule that triggered, and the surrounding logic — and generates a targeted fix.
+  <Step title="Review the pull request">
+    Inspect the proposed code change in GitHub like any normal PR.
   </Step>
-  <Step title="PR Opened">
-    A pull request is opened on a `cybox/fix/{vuln-id}` branch in your repository, with a description explaining what was changed and why.
-  </Step>
-  <Step title="You Review and Merge">
-    Review the PR in GitHub as you would any other change. AutoFix PRs go through PR Firewall like any other PR.
+  <Step title="Merge with confidence">
+    Merge after validation, or edit the proposed code if adjustments are needed.
   </Step>
 </Steps>
 
----
+## What to verify before merge
 
-## Supported Finding Types
+Every AutoFix PR should be reviewed for:
 
-| Scanner | AutoFix Available |
-|---------|-----------------|
-| SAST (Semgrep) | ✅ Yes |
-| SCA (OSV) | ✅ Yes — upgrades vulnerable dependency |
-| Secrets (Gitleaks) | ✅ Yes — removes/rotates secret reference |
-| IaC (KICS) | ✅ Yes |
-| License | ⚠️ Partial — flags for manual review |
-| DAST | ❌ Not applicable (live asset findings) |
-
----
-
-## Reviewing an AutoFix PR
-
-Every AutoFix PR includes:
-- **What changed** — a clear description of the fix applied
-- **Why** — the original finding, severity, and rule reference
-- **What to verify** — any edge cases or manual steps needed
-
-<Warning>
-Always review AutoFix PRs before merging. CyBox generates fixes with high accuracy, but you are responsible for validating the change fits your codebase.
-</Warning>
-
----
+- Correctness
+- Side effects
+- Fit with local coding patterns
+- Test coverage where relevant
 
 ## AutoFix and PR Firewall
 
-AutoFix PRs are scanned by PR Firewall like any other PR. If an AutoFix PR introduces a new finding (rare but possible), the Firewall will flag it before merge.
+AutoFix does not bypass governance.
 
----
+If the generated pull request still introduces meaningful risk, PR Firewall can still warn on it or block it like any other pull request.
 
-## FAQ
+## Good rollout advice
 
-<AccordionGroup>
-  <Accordion title="What if AutoFix isn't available for a finding?">
-    Some findings — particularly complex logic flaws or DAST findings — require manual remediation. CyBox provides detailed remediation guidance in the finding detail view for these cases.
-  </Accordion>
-  <Accordion title="Can I run AutoFix on multiple findings at once?">
-    Bulk AutoFix is on the roadmap. Currently, AutoFix is triggered per finding.
-  </Accordion>
-  <Accordion title="Does AutoFix modify my main branch directly?">
-    No. AutoFix always opens a PR on a separate `cybox/fix/{vuln-id}` branch. You control when and whether to merge.
-  </Accordion>
-</AccordionGroup>
+Start with one repository and a narrow set of supported finding types. Review a few generated PRs closely, then expand usage once the team is comfortable.

@@ -1,86 +1,74 @@
 ---
 title: "PR Firewall"
-description: "Enforce security gates on every pull request — with special awareness of AI-generated code."
+description: "Review, warn on, or block risky pull requests before they are merged."
 ---
 
-## What It Does
+# PR Firewall
 
-PR Firewall evaluates every pull request against your codebase and produces a **verdict** — Allow, Warn, or Block — posted as a GitHub Check. When a PR is blocked, it cannot be merged until the issues are resolved (requires GitHub branch protection rules).
+PR Firewall puts security governance directly in the pull request flow.
 
----
+Instead of discovering issues after merge, teams can make a decision while the change is still under review.
 
-## How Verdicts Work
+## What PR Firewall does
 
-CyBox evaluates **only findings introduced by the PR** (diff-mapped). Pre-existing findings do not affect the verdict.
+For each pull request, CyBox evaluates the risk introduced by that change and returns a verdict:
 
-| Verdict | Condition | GitHub Check |
-|---------|-----------|-------------|
-| ✅ **Allow** | No new findings, or only Low/Informational | Passes |
-| ⚠️ **Warn** | New Medium severity findings | Passes with warning |
-| 🚫 **Block** | New Critical or High severity findings | Fails — blocks merge |
+| Verdict | Meaning |
+|---|---|
+| **Allow** | The pull request can move forward |
+| **Warn** | The pull request should be reviewed carefully before merge |
+| **Block** | The pull request introduces risk that should be fixed before merge |
 
-<Note>
-If the scan itself fails (e.g. timeout, infrastructure error), CyBox posts a neutral check and does **not** block the PR. A scan failure is never treated as a security block.
-</Note>
+## Why that matters
 
----
+PR Firewall helps teams answer three important questions fast:
 
-## AI-Assisted PR Detection
+1. **Did this PR introduce meaningful risk?**
+2. **Is the risk severe enough to stop merge?**
+3. **What exactly needs to be fixed?**
 
-PR Firewall detects whether a PR was created or significantly influenced by an AI coding tool. Detection uses a priority-based signal system:
+## What CyBox evaluates
 
-1. **AI-assisted label** on the PR
-2. **Copilot co-author** in commit messages
-3. **Cursor/Claude config files** present (`.cursor/`, `CLAUDE.md`)
-4. **AI tool config files** (`copilot-instructions.md`, `.windsurfrules`)
-5. **Bot-authored PRs** from v0, Lovable, Bolt, Devin, and similar tools
+PR Firewall is designed to focus on issues introduced by the pull request, so teams do not get blocked by old baseline problems that already existed.
 
-When AI involvement is detected, it is displayed on the finding detail view. In V1, this is informational — verdicts are based on findings, not AI involvement alone.
+That keeps reviews practical and reduces friction.
 
----
+## AI-aware review context
 
-## Setup
+CyBox can surface signals that a pull request may have been created or heavily influenced by AI tooling.
 
-### 1. Install the CyBox GitHub App
+That context helps teams understand where additional scrutiny may be useful, while verdicts remain grounded in the risk actually found.
 
-See [GitHub Integration](/integrations/github) for full instructions.
+## Typical rollout
 
-### 2. Enable Branch Protection
+<Steps>
+  <Step title="Install GitHub integration">
+    Connect the repository through the CyBox GitHub integration.
+  </Step>
+  <Step title="Review baseline findings">
+    Understand the current state of the repository so old issues do not confuse rollout.
+  </Step>
+  <Step title="Enable branch protection">
+    Require the CyBox check if you want Block verdicts to stop merge in GitHub.
+  </Step>
+  <Step title="Monitor and tune">
+    Review verdict trends, override cases, and team feedback as usage grows.
+  </Step>
+</Steps>
 
-For Block verdicts to prevent merging, you must enable branch protection on your target branch:
+## What teams see in CyBox
 
-1. Go to your GitHub repo → **Settings → Branches**
-2. Add a branch protection rule for `main` (or your default branch)
-3. Enable **Require status checks to pass before merging**
-4. Select **CyBox Security Scan** from the list of checks
+In the PR Firewall view, teams can review:
 
-### 3. That's It
+- Pull request verdict
+- Introduced findings
+- Severity distribution
+- Linked repository and PR
+- Review history and decision context
 
-PR Firewall activates automatically on every new PR once the GitHub App is installed and branch protection is configured.
+## Good use cases
 
----
-
-## Reviewing Firewall Events
-
-Go to **PR Firewall** in the CyBox dashboard to see:
-- All PRs scanned
-- Verdict per PR
-- Findings introduced per PR
-- AI involvement signal (if detected)
-- Link to the GitHub PR
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I override a Block verdict?">
-    Yes. Repository admins can bypass branch protection rules in GitHub and merge anyway. CyBox logs the verdict — the decision to override is yours.
-  </Accordion>
-  <Accordion title="Does PR Firewall scan the full repo or just the diff?">
-    Verdicts are based on **introduced findings only** (diff-mapped). However, the full repo scan still runs — findings outside the diff appear in the Findings page but do not affect the PR verdict.
-  </Accordion>
-  <Accordion title="What happens if CyBox is down?">
-    If the CyBox check does not complete, GitHub will show the check as pending. If you have branch protection set to require the check, the PR will be unblockable until the check completes or you override manually.
-  </Accordion>
-</AccordionGroup>
+- Preventing new secrets from being merged
+- Catching risky auth or permission changes before release
+- Highlighting dangerous dependency or infrastructure changes in the PR itself
+- Adding governance without forcing teams into a separate workflow

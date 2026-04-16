@@ -1,79 +1,64 @@
 ---
 title: "Findings & Security Posture"
-description: "Understand how CyBox surfaces, prioritizes, and tracks security findings across your assets."
+description: "Understand how CyBox organizes findings, tracks status, and helps teams focus on what matters first."
 ---
 
-## What Is a Finding?
+# Findings and security posture
 
-A finding is a detected security issue in one of your assets. Each finding includes:
+CyBox is designed to help teams work from signal, not noise.
 
-- **Title** — human-readable description of the issue
-- **Severity** — Critical, High, Medium, Low, or Informational
-- **Scanner** — which scanner detected it (SAST, SCA, Secrets, IaC, License, DAST)
-- **Location** — file path and line number (for code findings) or URL and endpoint (for DAST findings)
-- **Status** — Open, Fixed, or Ignored
-- **Remediation guidance** — what to do about it
-- **AutoFix availability** — whether a one-click fix PR is available
+## What a finding includes
 
----
+Each finding is a tracked security issue tied to an asset or endpoint.
 
-## Severity Levels
+Typical finding context includes:
 
-| Severity | Meaning |
-|----------|---------|
-| 🔴 **Critical** | Exploitable vulnerability with high impact. Fix immediately. |
-| 🟠 **High** | Significant risk. Fix before next release. |
-| 🟡 **Medium** | Moderate risk. Address in upcoming sprint. |
-| 🔵 **Low** | Minor issue. Fix when convenient. |
-| ⚪ **Informational** | No direct risk. Awareness only. |
+- Clear title
+- Severity
+- Asset or repository
+- File location or URL endpoint
+- Evidence
+- Remediation guidance
+- Status
+- AutoFix eligibility, where supported
 
----
+## Severity model
 
-## Finding Status
+| Severity | What it means |
+|---|---|
+| **Critical** | Immediate attention required |
+| **High** | Serious risk that should be addressed quickly |
+| **Medium** | Important, but often manageable in the next cycle |
+| **Low** | Lower urgency issue |
+| **Informational** | Useful context with little direct risk |
+
+## Status model
 
 | Status | Meaning |
-|--------|---------|
-| **Open** | Active finding, not yet resolved |
-| **Fixed** | No longer detected in the latest scan |
-| **Ignored** | Manually dismissed (with reason) |
+|---|---|
+| **Open** | Still active and unresolved |
+| **Fixed** | No longer detected after remediation |
+| **Ignored** | Dismissed intentionally with reason |
 
-<Note>
-CyBox uses fingerprint-based deduplication. The same vulnerability found in multiple scans is tracked as a single finding — not duplicated on every scan.
-</Note>
+## Triage flow that works well
 
----
+1. Start with Critical and High
+2. Group by asset to spot concentration of risk
+3. Review introduced issues separately from historic backlog
+4. Use AutoFix where available
+5. Ignore only with a clear reason
 
-## Security Posture Score
+## Posture over time
 
-The **Security Risk Score** on your dashboard is a composite score across all open findings, weighted by severity:
+CyBox should help teams answer more than just **how many findings exist**.
 
-- Critical × 15
-- High × 5
-- Medium × 1
-- Low × 0.3
+It should also help answer:
 
-The score uses a sub-linear decay curve so a single critical finding has significant impact, but adding more low-severity findings does not linearly inflate the score. Lower is better.
+- Is risk getting better or worse?
+- Which assets are consistently problematic?
+- Are new pull requests introducing issues faster than teams are closing them?
+- Where can AutoFix reduce backlog fastest?
 
----
+## Best practice
 
-## Filtering and Triage
-
-From the **Findings** page you can filter by:
-
-- **Severity** — focus on Critical/High first
-- **Scanner** — isolate SAST, SCA, Secrets, etc.
-- **Asset** — view findings for a specific repo or URL
-- **Status** — Open, Fixed, Ignored
-- **Introduced in PR** — view findings tied to a specific pull request
-
----
-
-## Ignoring Findings
-
-To ignore a finding:
-1. Open the finding detail
-2. Click **Ignore**
-3. Select a reason (False Positive, Risk Accepted, Not Applicable)
-4. Optionally add a note
-
-Ignored findings are tracked with the reason and timestamp. They can be reinstated at any time.
+Use findings for day-to-day remediation, and use posture views for trend and ownership conversations.

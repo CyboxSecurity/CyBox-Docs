@@ -1,77 +1,61 @@
 ---
 title: "Shadow Apps"
-description: "Discover and monitor deployed web assets — including apps your security team may not know exist."
+description: "Discover external apps, websites, and deployments your team may not be formally tracking."
 ---
 
-## What Are Shadow Apps?
+# Shadow Apps
 
-Shadow Apps are deployed web assets — staging environments, internal tools, preview deployments, demo apps — that exist outside your official asset inventory. They are often created by developers using AI tools and cloud platforms without going through a formal security review.
+Shadow Apps are external-facing apps, previews, internal tools, demos, or websites that exist outside the official asset inventory.
 
-CyBox automatically discovers and monitors these assets by connecting to your deployment platforms.
+They often appear because teams can now build and deploy quickly with AI tools and modern platforms.
 
----
+## Why Shadow Apps matter
 
-## Supported Platforms
+These assets can expose real risk even when they were never part of a formal security process.
 
-| Platform | Discovery Method | Sync Frequency |
-|----------|-----------------|----------------|
-| **Vercel** | API — lists all deployments | Every 6 hours |
-| **Render** | API — lists all services | Every 6 hours |
+Common examples include:
 
-Additional platforms coming soon.
+- Preview deployments
+- Marketing microsites
+- Internal tools exposed to the internet
+- Demo apps built for prospects or pilots
+- Fast-moving side projects tied to production data or credentials
 
----
+## What CyBox helps you do
 
-## What CyBox Checks
+CyBox helps teams:
 
-For each discovered asset, CyBox runs **5 posture checks**:
+- Discover internet-facing assets
+- Review posture at the asset level
+- Understand which assets need attention first
+- Link live exposure back to the broader security workflow
 
-| Check | What It Looks For |
-|-------|------------------|
-| **HTTPS Enforcement** | Is the asset accessible over HTTP (unencrypted)? |
-| **Security Headers** | Missing headers: CSP, X-Frame-Options, HSTS, etc. |
-| **Exposed Sensitive Paths** | Admin panels, `.env` files, debug endpoints |
-| **Open Redirects** | Redirect parameters that can be abused |
-| **Information Disclosure** | Server banners, stack traces, version leakage |
+## What to look for
 
----
+A useful Shadow Apps review usually starts with:
 
-## Setup
+- Which assets are public?
+- Which assets have serious posture issues?
+- Which assets look abandoned or unmanaged?
+- Which assets should be scanned more closely with live exposure validation?
 
-### Connect Vercel
+## Suggested workflow
 
-1. Go to **Integrations → Domain Monitoring** in the CyBox dashboard
-2. Click **Connect Vercel**
-3. Authorize CyBox with your Vercel account
-4. CyBox will immediately begin discovering deployments
+1. Connect supported deployment or domain sources
+2. Review newly discovered assets
+3. Open the highest-risk assets first
+4. Run or review live scans where relevant
+5. Decide whether to fix, monitor, or retire the asset
 
-### Connect Render
+## In the product
 
-1. Go to **Integrations → Domain Monitoring**
-2. Click **Connect Render**
-3. Enter your Render API key (found in Render Dashboard → Account Settings → API Keys)
-4. Save — discovery begins automatically
+A Shadow Apps detail view is most useful when it answers these questions clearly:
 
----
+- What is this asset?
+- Why is it risky?
+- What evidence supports that?
+- What should the team do next?
 
-## Viewing Discovered Assets
-
-1. Go to **Assets** in the sidebar
-2. Filter by **Source: Vercel** or **Source: Render**
-3. Click any asset to see:
-   - Deployment URL
-   - Discovery timestamp
-   - Posture check results
-   - DAST findings (if scanned)
-   - PR Firewall status badge (if linked to a repo)
-
----
-
-## Auto-Sync and Reconciliation
-
-CyBox syncs with connected platforms every 6 hours. When a deployment is removed:
-- The asset is marked **Inactive** in CyBox
-- Associated findings are retained for audit purposes
-- Active scan scheduling stops
-
-New deployments discovered in the next sync are added automatically.
+<Tip>
+This page is a great place for a screenshot of the Shadow Apps list and one detail-page screenshot with posture indicators.
+</Tip>

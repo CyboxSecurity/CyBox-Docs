@@ -1,59 +1,47 @@
 ---
 title: "Security Model"
-description: "How CyBox handles your data, access, and tenant isolation."
+description: "How CyBox handles tenant isolation, data access, and sensitive material during scans."
 ---
 
-## Tenant Isolation
+# Security model
 
-CyBox is a multi-tenant platform. Every organization's data is fully isolated:
+CyBox is designed for multi-tenant use with organization-scoped access and isolated customer data.
 
-- All database queries are scoped by `org_id`
-- Row-Level Security (RLS) is enforced at the database layer — no query can return data from another organization
-- API endpoints validate organization membership on every request
+## Tenant isolation
 
----
+- Every organization is logically separated
+- Requests are validated against organization membership
+- Data access is scoped to the active organization context
+- Isolation is enforced at the storage and application layers
 
-## Data Handling
+## Source code handling
+
+CyBox is designed to minimize code persistence during scanning.
 
 <AccordionGroup>
-  <Accordion title="Source Code">
-    CyBox **does not store your source code**. Repositories are cloned ephemerally into an isolated scan environment, scanned, and the clone is deleted immediately after the scan completes. Only findings (metadata) are persisted.
+  <Accordion title="Repository content">
+    Repository data is used for scanning workflows and is not intended to become long-term product content. Teams primarily work from findings, metadata, and review results.
   </Accordion>
-  <Accordion title="Findings Data">
-    Finding metadata (file path, line number, rule ID, severity, code snippet) is stored in CyBox's database, scoped to your organization, and protected by RLS.
+  <Accordion title="Findings data">
+    Findings include the context needed to understand and remediate an issue, such as location, severity, evidence, and status.
   </Accordion>
-  <Accordion title="GitHub Access Tokens">
-    GitHub installation tokens are short-lived and scoped to the repositories you explicitly authorized. CyBox does not store long-lived OAuth tokens.
+  <Accordion title="Secrets exposure">
+    When secrets are detected, CyBox should preserve only the minimum evidence needed for triage and verification.
   </Accordion>
-  <Accordion title="Secrets Found in Scans">
-    When Gitleaks detects a secret in your code, CyBox stores a **partial match** (first/last few characters) for identification — never the full secret value.
+  <Accordion title="Access tokens">
+    Connected integration credentials should be scoped to the minimum access required for the feature being used.
   </Accordion>
 </AccordionGroup>
 
----
+## Practical controls
 
-## GitHub App Permissions
+| Area | Control |
+|---|---|
+| **Organization access** | Membership-based access to assets and findings |
+| **Sensitive data** | Minimized retention and least-privilege handling |
+| **PR decisions** | Logged verdicts for auditability |
+| **Integrations** | Explicit customer authorization required |
 
-| Permission | Scope | Reason |
-|-----------|-------|--------|
-| **Contents** | Read | Clone repository for scanning |
-| **Pull Requests** | Read + Write | Post PR Firewall check results |
-| **Checks** | Write | Create GitHub Check runs |
-| **Metadata** | Read | List repositories |
+## Need a deeper review?
 
-CyBox requests the minimum permissions required. We do not request write access to code.
-
----
-
-## Infrastructure
-
-- Hosted on **Railway** (isolated containers per service)
-- Database: **Supabase** (Postgres with RLS)
-- All data encrypted at rest and in transit (TLS 1.2+)
-- Scans run in ephemeral, isolated job workers
-
----
-
-## Compliance
-
-For enterprise compliance documentation (SOC 2, data processing agreements, custom security reviews), contact [security@cybox.ai](mailto:security@cybox.ai).
+For security questionnaires, enterprise reviews, or architecture discussions, contact [security@cybox.ai](mailto:security@cybox.ai).
