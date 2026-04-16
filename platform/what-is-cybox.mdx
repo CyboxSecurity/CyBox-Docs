@@ -1,0 +1,57 @@
+---
+title: "What is CyBox?"
+description: "CyBox is the control layer that helps companies detect, govern, and stop risky AI-generated code before it reaches production."
+---
+
+## The One-Line Answer
+
+CyBox is a **security control layer for AI-generated code** — discovering what was built, catching what was missed, and stopping risk before it reaches production.
+
+---
+
+## The Context
+
+AI coding tools have changed the pace of software development. Engineers using Copilot, Cursor, Claude, v0, or Bolt ship code in hours that would have taken days. But the security implications are significant:
+
+- AI-generated code introduces vulnerabilities at the same speed it introduces features
+- Most AI tools have no awareness of your organization's security posture
+- Traditional AppSec tools were designed for human-paced development — not AI-paced
+
+CyBox was built for this new reality.
+
+---
+
+## What CyBox Covers
+
+<AccordionGroup>
+  <Accordion title="Code Security (SAST)">
+    Static analysis across your entire codebase. CyBox uses Semgrep with curated rulesets to detect injection flaws, insecure configurations, hardcoded secrets patterns, and more — mapped to the exact diff that introduced them.
+  </Accordion>
+  <Accordion title="Dependency Risk (SCA)">
+    Open source vulnerability scanning powered by OSV-Scanner. Every dependency, every CVE, prioritized by severity and exploitability.
+  </Accordion>
+  <Accordion title="Secrets Detection">
+    Powered by Gitleaks. Catches API keys, tokens, credentials, and private keys committed to code — including in git history.
+  </Accordion>
+  <Accordion title="Infrastructure as Code (IaC)">
+    Scans Terraform, CloudFormation, Kubernetes manifests, and Dockerfiles for misconfigurations using KICS.
+  </Accordion>
+  <Accordion title="License Compliance">
+    Detects open source license risks across npm, pip, and Go modules — flagging copyleft licenses that may conflict with commercial distribution.
+  </Accordion>
+  <Accordion title="Live Exposure Validation (DAST)">
+    Actively tests deployed web assets for exploitable vulnerabilities — not just what's in the code, but what's reachable from the internet.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## The CyBox Difference
+
+| | Traditional Scanners | CyBox |
+|---|---|---|
+| **Built for** | Human-paced dev | AI-paced dev |
+| **Scope** | Code only | Code + deployed assets |
+| **Action** | Report findings | Fix findings (AutoFix) |
+| **Enforcement** | None | PR Firewall gate |
+| **AI awareness** | None | Detects AI-generated PRs |

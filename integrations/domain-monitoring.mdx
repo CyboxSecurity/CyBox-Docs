@@ -1,0 +1,84 @@
+---
+title: "Domain Monitoring"
+description: "Connect Vercel and Render to automatically discover and monitor deployed web assets."
+---
+
+## Overview
+
+CyBox connects to your deployment platforms to automatically discover apps, staging environments, and preview deployments — including ones your security team may not know about (Shadow Apps).
+
+Once discovered, assets are added to your CyBox inventory and scanned with DAST on a regular schedule.
+
+---
+
+## Supported Platforms
+
+| Platform | Status |
+|----------|--------|
+| **Vercel** | ✅ Available |
+| **Render** | ✅ Available |
+| More coming soon | 🔜 |
+
+---
+
+## Connect Vercel
+
+<Steps>
+  <Step title="Go to Integrations">
+    In the CyBox dashboard, go to **Integrations → Domain Monitoring**.
+  </Step>
+  <Step title="Click Connect Vercel">
+    Click the **Connect Vercel** button.
+  </Step>
+  <Step title="Authorize CyBox">
+    You'll be redirected to Vercel. Authorize CyBox to access your Vercel account.
+  </Step>
+  <Step title="Discovery Begins">
+    CyBox immediately syncs your Vercel deployments and adds them as URL assets.
+  </Step>
+</Steps>
+
+---
+
+## Connect Render
+
+<Steps>
+  <Step title="Get Your Render API Key">
+    In Render, go to **Account Settings → API Keys** and generate a new key.
+  </Step>
+  <Step title="Go to Integrations">
+    In the CyBox dashboard, go to **Integrations → Domain Monitoring**.
+  </Step>
+  <Step title="Click Connect Render">
+    Enter your Render API key and click **Save**.
+  </Step>
+  <Step title="Discovery Begins">
+    CyBox syncs your Render services and adds them as URL assets.
+  </Step>
+</Steps>
+
+---
+
+## Sync Schedule
+
+CyBox syncs with connected platforms **every 6 hours**. New deployments are discovered and added automatically. Removed deployments are marked **Inactive** — their findings are retained for audit purposes.
+
+---
+
+## What Gets Scanned
+
+For each discovered URL asset, CyBox runs:
+- **5 posture checks** (security headers, HTTPS, exposed paths, etc.)
+- **Full DAST scan** on the initial discovery and every 24 hours after
+
+See [Live Exposure Validation](/features/live-exposure-validation) for details on what DAST checks.
+
+---
+
+## Disconnecting a Platform
+
+To remove a platform integration:
+
+1. Go to **Integrations → Domain Monitoring**
+2. Click **Disconnect** next to the platform
+3. Existing assets and findings are retained — only future syncs stop

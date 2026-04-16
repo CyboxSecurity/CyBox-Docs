@@ -1,0 +1,63 @@
+---
+title: "Review PR Firewall Events"
+description: "View and understand PR Firewall verdicts across your repositories."
+---
+
+## Where to Find PR Firewall Events
+
+Go to **PR Firewall** in the left sidebar. This page lists all pull requests that have been evaluated by CyBox, with their verdict and findings summary.
+
+---
+
+## Reading the Events Table
+
+Each row represents a scanned PR and shows:
+
+| Column | Description |
+|--------|-------------|
+| **Repository** | The GitHub repo the PR belongs to |
+| **PR Title** | Links directly to the GitHub PR |
+| **Author** | The GitHub user who opened the PR |
+| **AI Detected** | Whether CyBox detected AI tool involvement |
+| **Verdict** | Allow ✅ / Warn ⚠️ / Block 🚫 |
+| **Findings** | Count of new findings by severity |
+| **Scanned At** | When the scan ran |
+
+---
+
+## Investigating a Blocked PR
+
+If a PR was blocked:
+
+1. Click the PR row to open the detail view
+2. See the **Introduced Findings** — the specific issues that caused the Block verdict
+3. Click any finding to see the full detail and remediation guidance
+4. Share the finding link with the PR author for context
+
+---
+
+## AI Involvement Indicator
+
+When CyBox detects that a PR was AI-assisted, you'll see an **AI** badge on the row. This is informational in V1 — the verdict is still based on findings, not AI involvement.
+
+Detection signals include:
+- AI-assisted label on the PR
+- Copilot co-author in commit messages
+- Cursor, Claude, or Windsurf config files in the repo
+- Bot-authored PR (v0, Lovable, Bolt, Devin, etc.)
+
+---
+
+## Responding to a Warn Verdict
+
+Warn verdicts don't block the merge — they surface Medium findings for your team's awareness. Best practice:
+
+1. Review the introduced findings
+2. Decide whether to fix before merging or track as a known risk
+3. If tracking as known risk, ignore the finding with reason **Risk Accepted**
+
+---
+
+## Re-Scanning a PR
+
+If a PR author pushes a fix commit, CyBox automatically re-scans and updates the verdict. No manual action needed.

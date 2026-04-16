@@ -1,0 +1,86 @@
+---
+title: "PR Firewall"
+description: "Enforce security gates on every pull request — with special awareness of AI-generated code."
+---
+
+## What It Does
+
+PR Firewall evaluates every pull request against your codebase and produces a **verdict** — Allow, Warn, or Block — posted as a GitHub Check. When a PR is blocked, it cannot be merged until the issues are resolved (requires GitHub branch protection rules).
+
+---
+
+## How Verdicts Work
+
+CyBox evaluates **only findings introduced by the PR** (diff-mapped). Pre-existing findings do not affect the verdict.
+
+| Verdict | Condition | GitHub Check |
+|---------|-----------|-------------|
+| ✅ **Allow** | No new findings, or only Low/Informational | Passes |
+| ⚠️ **Warn** | New Medium severity findings | Passes with warning |
+| 🚫 **Block** | New Critical or High severity findings | Fails — blocks merge |
+
+<Note>
+If the scan itself fails (e.g. timeout, infrastructure error), CyBox posts a neutral check and does **not** block the PR. A scan failure is never treated as a security block.
+</Note>
+
+---
+
+## AI-Assisted PR Detection
+
+PR Firewall detects whether a PR was created or significantly influenced by an AI coding tool. Detection uses a priority-based signal system:
+
+1. **AI-assisted label** on the PR
+2. **Copilot co-author** in commit messages
+3. **Cursor/Claude config files** present (`.cursor/`, `CLAUDE.md`)
+4. **AI tool config files** (`copilot-instructions.md`, `.windsurfrules`)
+5. **Bot-authored PRs** from v0, Lovable, Bolt, Devin, and similar tools
+
+When AI involvement is detected, it is displayed on the finding detail view. In V1, this is informational — verdicts are based on findings, not AI involvement alone.
+
+---
+
+## Setup
+
+### 1. Install the CyBox GitHub App
+
+See [GitHub Integration](/integrations/github) for full instructions.
+
+### 2. Enable Branch Protection
+
+For Block verdicts to prevent merging, you must enable branch protection on your target branch:
+
+1. Go to your GitHub repo → **Settings → Branches**
+2. Add a branch protection rule for `main` (or your default branch)
+3. Enable **Require status checks to pass before merging**
+4. Select **CyBox Security Scan** from the list of checks
+
+### 3. That's It
+
+PR Firewall activates automatically on every new PR once the GitHub App is installed and branch protection is configured.
+
+---
+
+## Reviewing Firewall Events
+
+Go to **PR Firewall** in the CyBox dashboard to see:
+- All PRs scanned
+- Verdict per PR
+- Findings introduced per PR
+- AI involvement signal (if detected)
+- Link to the GitHub PR
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I override a Block verdict?">
+    Yes. Repository admins can bypass branch protection rules in GitHub and merge anyway. CyBox logs the verdict — the decision to override is yours.
+  </Accordion>
+  <Accordion title="Does PR Firewall scan the full repo or just the diff?">
+    Verdicts are based on **introduced findings only** (diff-mapped). However, the full repo scan still runs — findings outside the diff appear in the Findings page but do not affect the PR verdict.
+  </Accordion>
+  <Accordion title="What happens if CyBox is down?">
+    If the CyBox check does not complete, GitHub will show the check as pending. If you have branch protection set to require the check, the PR will be unblockable until the check completes or you override manually.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,75 @@
+---
+title: "Quickstart"
+description: "Connect your first repository and get your first scan results in under 5 minutes."
+---
+
+## Prerequisites
+
+- A CyBox account ([sign up at app.cybox.ai](https://app.cybox.ai))
+- Admin access to a GitHub organization or repository
+
+---
+
+## Step 1: Connect GitHub
+
+1. Go to **Integrations → GitHub** in the CyBox dashboard
+2. Click **Install GitHub App**
+3. Select the GitHub organization or repositories you want to connect
+4. Authorize the app — CyBox requests read access to code and write access to pull requests (for AutoFix and PR Firewall checks)
+
+<Note>
+CyBox never stores your source code. Scans run ephemerally and only findings are persisted.
+</Note>
+
+---
+
+## Step 2: Add Your First Repository
+
+1. Go to **Assets** in the sidebar
+2. Click **Add Asset → Repository**
+3. Select the repository from the connected GitHub org
+4. Click **Save**
+
+---
+
+## Step 3: Run Your First Scan
+
+CyBox will automatically trigger a scan on the default branch after connecting.
+
+You can also trigger manually:
+1. Open the asset from the Assets page
+2. Click **Scan Now**
+
+Scan time varies by repo size — typically **1–3 minutes** for most codebases.
+
+---
+
+## Step 4: Review Findings
+
+Once the scan completes:
+1. Go to **Findings** in the sidebar
+2. Filter by severity, type, or asset
+3. Click any finding to see full details, remediation guidance, and AutoFix availability
+
+<Tip>
+Start with **Critical** and **High** severity findings. Use the AutoFix button to generate a fix PR in one click.
+</Tip>
+
+---
+
+## What's Next
+
+<CardGroup cols={2}>
+  <Card title="Invite Your Team" icon="users" href="/getting-started/invite-your-team">
+    Add teammates to your CyBox organization.
+  </Card>
+  <Card title="Enable PR Firewall" icon="shield" href="/features/pr-firewall">
+    Block risky PRs before they merge.
+  </Card>
+  <Card title="Add a Domain" icon="globe" href="/guides/add-a-domain-or-website">
+    Scan live web assets with DAST.
+  </Card>
+  <Card title="Review Findings" icon="list" href="/guides/review-findings">
+    Learn how to triage and act on findings.
+  </Card>
+</CardGroup>

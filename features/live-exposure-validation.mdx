@@ -1,0 +1,83 @@
+---
+title: "Live Exposure Validation (DAST)"
+description: "Actively test your deployed web assets for exploitable vulnerabilities — not just what's in the code, but what's reachable from the internet."
+---
+
+## What Is DAST?
+
+Dynamic Application Security Testing (DAST) actively probes your running web assets from the outside — the way an attacker would. Unlike SAST (which reads code), DAST validates whether vulnerabilities are actually exploitable in your live environment.
+
+CyBox DAST is powered by **Nuclei v3** with a curated ruleset of 30+ checks optimized for modern web apps.
+
+---
+
+## What Gets Tested
+
+DAST scans run in two phases:
+
+### Fast Phase
+Runs immediately — high-confidence, low-noise checks:
+
+- Exposed sensitive files (`.env`, `.git`, `wp-config.php`, backup files)
+- Admin panel exposure
+- Default credentials on common services
+- Missing security headers (CSP, HSTS, X-Frame-Options, etc.)
+- HTTP to HTTPS redirect enforcement
+- Server information disclosure
+
+### Extended Phase
+Deeper checks — runs after the fast phase:
+
+- Open redirects
+- Subdomain takeover indicators
+- Exposed API documentation (Swagger/OpenAPI endpoints)
+- Debug mode detection
+- Cross-origin misconfigurations
+- Cookie security flags (Secure, HttpOnly, SameSite)
+- Clickjacking vulnerability
+
+---
+
+## Supported Asset Types
+
+| Asset Type | DAST Supported |
+|-----------|---------------|
+| Public web URLs | ✅ Yes |
+| Vercel deployments | ✅ Yes |
+| Render services | ✅ Yes |
+| GitHub repositories | ❌ No (use SAST/SCA) |
+
+---
+
+## DAST Finding Details
+
+Each DAST finding includes:
+
+- **What was found** — the specific issue detected
+- **Why it matters** — the risk and potential impact
+- **Evidence** — the HTTP request/response that triggered the finding
+- **Recommended action** — specific remediation steps
+- **Exploitability** — how easily this could be exploited in practice
+
+---
+
+## Scheduling
+
+DAST scans run:
+- Automatically when a new URL asset is added
+- Every 24 hours on all active URL assets
+- On-demand from the asset detail page
+
+---
+
+## Setup
+
+No special configuration required. Add a URL asset:
+
+1. Go to **Assets → Add Asset → Website / URL**
+2. Enter the target URL (must be publicly accessible)
+3. Click **Save** — DAST starts automatically
+
+<Warning>
+Only scan assets you own or have explicit permission to test. CyBox DAST sends active HTTP requests to the target URL.
+</Warning>

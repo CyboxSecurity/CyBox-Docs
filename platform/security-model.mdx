@@ -1,0 +1,59 @@
+---
+title: "Security Model"
+description: "How CyBox handles your data, access, and tenant isolation."
+---
+
+## Tenant Isolation
+
+CyBox is a multi-tenant platform. Every organization's data is fully isolated:
+
+- All database queries are scoped by `org_id`
+- Row-Level Security (RLS) is enforced at the database layer — no query can return data from another organization
+- API endpoints validate organization membership on every request
+
+---
+
+## Data Handling
+
+<AccordionGroup>
+  <Accordion title="Source Code">
+    CyBox **does not store your source code**. Repositories are cloned ephemerally into an isolated scan environment, scanned, and the clone is deleted immediately after the scan completes. Only findings (metadata) are persisted.
+  </Accordion>
+  <Accordion title="Findings Data">
+    Finding metadata (file path, line number, rule ID, severity, code snippet) is stored in CyBox's database, scoped to your organization, and protected by RLS.
+  </Accordion>
+  <Accordion title="GitHub Access Tokens">
+    GitHub installation tokens are short-lived and scoped to the repositories you explicitly authorized. CyBox does not store long-lived OAuth tokens.
+  </Accordion>
+  <Accordion title="Secrets Found in Scans">
+    When Gitleaks detects a secret in your code, CyBox stores a **partial match** (first/last few characters) for identification — never the full secret value.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## GitHub App Permissions
+
+| Permission | Scope | Reason |
+|-----------|-------|--------|
+| **Contents** | Read | Clone repository for scanning |
+| **Pull Requests** | Read + Write | Post PR Firewall check results |
+| **Checks** | Write | Create GitHub Check runs |
+| **Metadata** | Read | List repositories |
+
+CyBox requests the minimum permissions required. We do not request write access to code.
+
+---
+
+## Infrastructure
+
+- Hosted on **Railway** (isolated containers per service)
+- Database: **Supabase** (Postgres with RLS)
+- All data encrypted at rest and in transit (TLS 1.2+)
+- Scans run in ephemeral, isolated job workers
+
+---
+
+## Compliance
+
+For enterprise compliance documentation (SOC 2, data processing agreements, custom security reviews), contact [security@cybox.ai](mailto:security@cybox.ai).

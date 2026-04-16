@@ -1,0 +1,77 @@
+---
+title: "Shadow Apps"
+description: "Discover and monitor deployed web assets — including apps your security team may not know exist."
+---
+
+## What Are Shadow Apps?
+
+Shadow Apps are deployed web assets — staging environments, internal tools, preview deployments, demo apps — that exist outside your official asset inventory. They are often created by developers using AI tools and cloud platforms without going through a formal security review.
+
+CyBox automatically discovers and monitors these assets by connecting to your deployment platforms.
+
+---
+
+## Supported Platforms
+
+| Platform | Discovery Method | Sync Frequency |
+|----------|-----------------|----------------|
+| **Vercel** | API — lists all deployments | Every 6 hours |
+| **Render** | API — lists all services | Every 6 hours |
+
+Additional platforms coming soon.
+
+---
+
+## What CyBox Checks
+
+For each discovered asset, CyBox runs **5 posture checks**:
+
+| Check | What It Looks For |
+|-------|------------------|
+| **HTTPS Enforcement** | Is the asset accessible over HTTP (unencrypted)? |
+| **Security Headers** | Missing headers: CSP, X-Frame-Options, HSTS, etc. |
+| **Exposed Sensitive Paths** | Admin panels, `.env` files, debug endpoints |
+| **Open Redirects** | Redirect parameters that can be abused |
+| **Information Disclosure** | Server banners, stack traces, version leakage |
+
+---
+
+## Setup
+
+### Connect Vercel
+
+1. Go to **Integrations → Domain Monitoring** in the CyBox dashboard
+2. Click **Connect Vercel**
+3. Authorize CyBox with your Vercel account
+4. CyBox will immediately begin discovering deployments
+
+### Connect Render
+
+1. Go to **Integrations → Domain Monitoring**
+2. Click **Connect Render**
+3. Enter your Render API key (found in Render Dashboard → Account Settings → API Keys)
+4. Save — discovery begins automatically
+
+---
+
+## Viewing Discovered Assets
+
+1. Go to **Assets** in the sidebar
+2. Filter by **Source: Vercel** or **Source: Render**
+3. Click any asset to see:
+   - Deployment URL
+   - Discovery timestamp
+   - Posture check results
+   - DAST findings (if scanned)
+   - PR Firewall status badge (if linked to a repo)
+
+---
+
+## Auto-Sync and Reconciliation
+
+CyBox syncs with connected platforms every 6 hours. When a deployment is removed:
+- The asset is marked **Inactive** in CyBox
+- Associated findings are retained for audit purposes
+- Active scan scheduling stops
+
+New deployments discovered in the next sync are added automatically.

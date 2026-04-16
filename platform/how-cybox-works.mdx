@@ -1,0 +1,81 @@
+---
+title: "How CyBox Works"
+description: "A technical overview of the CyBox scanning pipeline, verdict engine, and data model."
+---
+
+## Architecture Overview
+
+CyBox is a multi-tenant SaaS platform. Each customer organization is fully isolated — all data is scoped by organization with row-level security enforced at the database level.
+
+---
+
+## The Scanning Pipeline
+
+When a scan is triggered (on push, PR, schedule, or manually), CyBox runs the following pipeline:
+
+```
+Asset (repo / URL)
+        │
+        ▼
+   ┌─────────────────────────────────┐
+   │         Scanner Orchestrator     │
+   │                                 │
+   │  SAST → SCA → Secrets → IaC    │
+   │  License → DAST (URL assets)   │
+   └─────────────────────────────────┘
+        │
+        ▼
+   Deduplication & Fingerprinting
+        │
+        ▼
+   Findings Store (per org, RLS)
+        │
+        ▼
+   Dashboard / PR Firewall / Alerts
+```
+
+### Scan Triggers
+
+| Trigger | When |
+|---------|------|
+| **Push** | Every push to the default branch |
+| **Pull Request** | Every PR open/update (PR Firewall) |
+| **Scheduled** | Every 24 hours on connected assets |
+| **Manual** | On-demand from the dashboard |
+
+---
+
+## Findings Model
+
+Every finding has:
+- **Fingerprint** — unique hash per asset + rule + location. Used for deduplication across scans.
+- **Severity** — Critical, High, Medium, Low, Informational
+- **Status** — Open, Fixed, Ignored
+- **Scanner** — SAST, SCA, Secrets, IaC, License, DAST
+- **Introduced by** — For PR scans: the diff that introduced the finding
+
+Findings persist across scans. A finding is marked **Fixed** only when it no longer appears in a subsequent scan.
+
+---
+
+## PR Firewall Verdict Engine
+
+For every pull request, CyBox evaluates **introduced findings only** (diff-mapped) and produces one of three verdicts:
+
+| Verdict | Condition |
+|---------|-----------|
+| **Allow** ✅ | No new findings, or only Low/Informational |
+| **Warn** ⚠️ | New Medium findings introduced |
+| **Block** 🚫 | New Critical or High findings introduced |
+
+The verdict is posted as a GitHub Check on the PR. Block verdicts prevent merge (when branch protection is enabled).
+
+---
+
+## AutoFix Pipeline
+
+When AutoFix is triggered for a finding:
+1. CyBox sends the finding context + relevant code to the AI fix engine
+2. A fix is generated and validated
+3. A PR is opened on a `cybox/fix/{vuln-id}` branch
+4. The PR is linked back to the original finding in the dashboard

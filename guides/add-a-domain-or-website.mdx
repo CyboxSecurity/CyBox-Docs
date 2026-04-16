@@ -1,0 +1,56 @@
+---
+title: "Add a Domain or Website"
+description: "Connect a live web asset to CyBox for DAST scanning and continuous exposure monitoring."
+---
+
+## When to Use This
+
+Add a domain or URL when you want CyBox to:
+- Actively test a live web app for exploitable vulnerabilities
+- Monitor a deployed environment (staging, production, preview)
+- Track posture checks for assets discovered via Shadow Apps
+
+---
+
+## Steps
+
+<Steps>
+  <Step title="Go to Assets">
+    In the CyBox dashboard, click **Assets** in the left sidebar.
+  </Step>
+  <Step title="Add Asset">
+    Click **Add Asset → Website / URL**.
+  </Step>
+  <Step title="Enter the URL">
+    Enter the full URL including protocol — e.g. `https://app.yourcompany.com`. The asset must be publicly accessible for DAST to run.
+  </Step>
+  <Step title="Save">
+    Click **Save**. A DAST scan starts automatically.
+  </Step>
+</Steps>
+
+---
+
+## Scan Results
+
+Once the scan completes (typically 2–5 minutes):
+- Go to **Findings** and filter by this asset
+- Or open the asset from **Assets** to see findings scoped to it
+
+---
+
+## Auto-Discovered Assets
+
+If you've connected Vercel or Render, CyBox automatically discovers and adds deployments as URL assets. You can trigger DAST on any of them from the asset detail page.
+
+---
+
+## Important Notes
+
+<Warning>
+Only add URLs for assets you own or have explicit permission to test. DAST sends active HTTP requests to the target.
+</Warning>
+
+<Note>
+CyBox does not crawl beyond the root URL. Scans target the specified URL and known subpaths — not a full site crawl.
+</Note>

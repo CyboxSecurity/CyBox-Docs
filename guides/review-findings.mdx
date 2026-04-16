@@ -1,0 +1,62 @@
+---
+title: "Review Findings"
+description: "How to triage, prioritize, and act on CyBox findings."
+---
+
+## Opening the Findings Page
+
+Click **Findings** in the left sidebar. You'll see all open findings across your organization, sorted by severity by default.
+
+---
+
+## Recommended Triage Order
+
+<Steps>
+  <Step title="Filter to Critical and High">
+    Use the **Severity** filter to show only Critical and High findings. These are your immediate priorities.
+  </Step>
+  <Step title="Check Secrets findings first">
+    Filter by **Scanner: Secrets**. Exposed credentials should be rotated immediately — before any other fix work.
+  </Step>
+  <Step title="Review SCA findings">
+    Filter by **Scanner: SCA**. Known CVEs in dependencies are often the fastest wins — AutoFix can update the version in one click.
+  </Step>
+  <Step title="Address SAST and IaC findings">
+    Work through SAST and IaC findings by asset, starting with your most critical repositories.
+  </Step>
+</Steps>
+
+---
+
+## Finding Detail View
+
+Click any finding to open the detail panel. It shows:
+
+- **Full description** of the vulnerability
+- **Exact location** — file, line number, or URL endpoint
+- **Code snippet** (for SAST findings)
+- **Remediation guidance** — what to change and why
+- **AutoFix button** — if a fix PR can be generated automatically
+- **Ignore option** — to dismiss with a reason
+
+---
+
+## Ignoring Findings
+
+If a finding is a false positive or the risk is accepted:
+
+1. Open the finding detail
+2. Click **Ignore**
+3. Select a reason:
+   - **False Positive** — CyBox incorrectly flagged this
+   - **Risk Accepted** — known risk, accepted by your team
+   - **Not Applicable** — not relevant to your context
+4. Add an optional note for your team
+
+Ignored findings are tracked and visible with their reason. They can be reinstated at any time.
+
+---
+
+## Tracking Progress
+
+The **Dashboard** shows your Security Risk Score and finding counts over time. Use it to track whether your posture is improving sprint over sprint.
