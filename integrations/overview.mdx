@@ -1,0 +1,138 @@
+---
+title: "Integrations"
+description: "Connect CyBox to your code hosts, deployment platforms, alert tools, and compliance systems — from one place."
+---
+
+CyBox integrations live at **Integrations** in the sidebar. Connect your repositories, deployment platforms, alerting tools, and compliance systems to give CyBox full visibility across your stack.
+
+---
+
+## Source Control
+
+Connect code hosts to sync repositories and enable automated scans, PR Firewall, and AutoFix.
+
+<CardGroup cols={3}>
+  <Card title="GitHub" icon="github">
+    **Connected** — the primary integration. Enables repository scanning, PR Firewall checks, and AutoFix pull requests.
+
+    [Setup guide →](/integrations/github)
+  </Card>
+  <Card title="GitHub Enterprise" icon="github">
+    For self-hosted GitHub Enterprise Server instances.
+
+    **Available soon**
+  </Card>
+  <Card title="GitLab" icon="gitlab">
+    Connect GitLab repositories for automated security scans.
+
+    **Available soon**
+  </Card>
+  <Card title="Bitbucket" icon="bitbucket">
+    Connect Bitbucket Cloud repositories.
+
+    **Available soon**
+  </Card>
+  <Card title="Bitbucket Server" icon="server">
+    For self-hosted Bitbucket Data Center / Server instances.
+
+    **Available soon**
+  </Card>
+  <Card title="Azure DevOps" icon="microsoft">
+    Connect Azure Repos for automated security scans.
+
+    **Available soon**
+  </Card>
+</CardGroup>
+
+---
+
+## External Exposure
+
+Connect deployment platforms so CyBox can automatically discover your deployed apps, staging environments, and preview deployments — including ones your security team may not know about (Shadow Apps).
+
+<CardGroup cols={3}>
+  <Card title="Render" icon="server">
+    Discover and monitor services deployed on Render. Detects public exposure, risky configs, and shadow deployments.
+
+    [Setup guide →](/integrations/domain-monitoring)
+  </Card>
+  <Card title="Vercel" icon="triangle">
+    Discover and monitor apps deployed on Vercel. Detects risky exposure, preview drift, and shadow deployments.
+
+    [Setup guide →](/integrations/domain-monitoring)
+  </Card>
+  <Card title="Railway" icon="train">
+    Discover and monitor services deployed on Railway. Tracks public exposure, environment drift, and shadow deployments.
+
+    **Available soon**
+  </Card>
+  <Card title="Lovable" icon="heart">
+    Scan apps built and deployed with Lovable for security misconfigurations and runtime exposure.
+  </Card>
+  <Card title="Bolt" icon="bolt">
+    Scan apps built with Bolt (bolt.new) for security issues and public exposure risks.
+  </Card>
+  <Card title="Base44" icon="cube">
+    Scan apps built with Base44 for misconfigurations, exposed services, and runtime exposure risks.
+  </Card>
+  <Card title="Domain Monitoring" icon="globe">
+    Monitor any public-facing domain for vulnerabilities, misconfigurations, and exposure risks — without connecting a deployment platform.
+
+    [Setup guide →](/integrations/domain-monitoring)
+  </Card>
+</CardGroup>
+
+---
+
+## Alerts & Workflow
+
+Send security findings into your team's existing tools so issues get actioned, not ignored.
+
+<CardGroup cols={3}>
+  <Card title="Slack" icon="slack">
+    Send security alerts and finding notifications directly to Slack channels.
+
+    **Available soon**
+  </Card>
+  <Card title="Jira" icon="jira">
+    Automatically create Jira issues for security findings — with severity, description, and remediation guidance.
+
+    **Available soon**
+  </Card>
+  <Card title="Email" icon="envelope">
+    Receive security alert digests and critical finding notifications by email.
+
+    **Available soon**
+  </Card>
+</CardGroup>
+
+---
+
+## Compliance
+
+Push security evidence into your compliance platforms automatically — keeping your audit trail current without manual exports.
+
+<CardGroup cols={2}>
+  <Card title="Drata" icon="shield-check">
+    Push compliance evidence from CyBox scans directly to Drata. Keeps your security controls up to date automatically.
+  </Card>
+  <Card title="Vanta" icon="shield">
+    Push compliance evidence to Vanta for SOC 2, ISO 27001, and other frameworks.
+
+    **Available soon**
+  </Card>
+</CardGroup>
+
+---
+
+## How to connect an integration
+
+1. Go to **Integrations** in the CyBox sidebar
+2. Find the integration you want to connect
+3. Click the card — each integration has its own setup flow
+4. Follow the authorization steps
+5. CyBox will immediately begin syncing data from the connected service
+
+<Note>
+Integrations marked **Available soon** are on the roadmap. To request early access or vote on priority, contact [support@cybox.ai](mailto:support@cybox.ai).
+</Note>
