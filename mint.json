@@ -1,9 +1,10 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "CyBox",
+  "name": "CyBox Security",
   "logo": {
     "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
+    "light": "/logo/light.png",
+    "href": "/getting-started/overview"
   },
   "favicon": "/favicon.png",
   "colors": {
