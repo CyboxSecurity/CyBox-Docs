@@ -3,7 +3,9 @@
   "theme": "mint",
   "name": "Documentation",
   "colors": {
-    "primary": "#0D9373"
+    "primary": "#020617",
+    "light": "#007BFF",
+    "dark": "#111013"
   },
   "navigation": {
     "groups": [
@@ -13,5 +15,6 @@
       }
     ]
   },
-  "logo": "/images/CyboxLogo500noBG.png"
+  "logo": "/images/CyboxLogo500noBG.png",
+  "favicon": "/images/favicon.png"
 }
