@@ -1,25 +1,87 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Documentation",
+  "name": "CyBox Security",
   "colors": {
-    "primary": "#020617",
-    "light": "#007BFF",
-    "dark": "#111013"
+    "primary": "#3C83F6",
+    "light": "#3C83F6",
+    "dark": "#020617"
   },
+  "logo": {
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png",
+    "href": "/getting-started/overview"
+  },
+  "favicon": "/favicon.png",
+  "topbarLinks": [
+    { "name": "cybox.ai", "url": "https://cybox.ai" }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://app.cybox.ai"
+  },
+  "anchors": [
+    { "name": "Dashboard", "icon": "chart-line", "url": "https://app.cybox.ai" },
+    { "name": "Support", "icon": "envelope", "url": "mailto:support@cybox.ai" }
+  ],
   "navigation": {
     "groups": [
       {
         "group": "Getting Started",
-        "pages": []
+        "pages": [
+          "getting-started/overview",
+          "getting-started/quickstart",
+          "getting-started/invite-your-team"
+        ]
+      },
+      {
+        "group": "Platform",
+        "pages": [
+          "platform/what-is-cybox",
+          "platform/how-cybox-works",
+          "platform/security-model"
+        ]
+      },
+      {
+        "group": "Core Features",
+        "pages": [
+          "features/pr-firewall",
+          "features/shadow-apps",
+          "features/findings-and-posture",
+          "features/autofix",
+          "features/live-exposure-validation"
+        ]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "guides/connect-a-repository",
+          "guides/add-a-domain-or-website",
+          "guides/run-your-first-scan",
+          "guides/review-findings",
+          "guides/use-autofix",
+          "guides/review-pr-firewall-events"
+        ]
+      },
+      {
+        "group": "Integrations",
+        "pages": [
+          "integrations/github",
+          "integrations/domain-monitoring"
+        ]
+      },
+      {
+        "group": "FAQ",
+        "pages": [
+          "faq/general"
+        ]
       }
     ]
   },
-  "logo": "/images/CyboxLogo500noBG.png",
-  "favicon": "/images/favicon.png",
-  "background": {
-    "color": {
-      "light": "#ffffff"
-    }
+  "redirects": [
+    { "source": "/", "destination": "/getting-started/overview" }
+  ],
+  "footerSocials": {
+    "linkedin": "https://linkedin.com/company/cybox-security"
   }
 }
