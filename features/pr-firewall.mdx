@@ -1,74 +1,270 @@
 ---
 title: "PR Firewall"
-description: "Review, warn on, or block risky pull requests before they are merged."
+description: "Enforce security gates on every pull request — with custom rules, AI-awareness, and Allow / Warn / Block verdicts."
 ---
 
-# PR Firewall
+## What It Does
 
-PR Firewall puts security governance directly in the pull request flow.
+PR Firewall evaluates every pull request against your configured rules and produces a **verdict** — Allow, Warn, or Block — posted as a GitHub Check. When a PR is blocked, it cannot be merged until the issues are resolved (requires GitHub branch protection).
 
-Instead of discovering issues after merge, teams can make a decision while the change is still under review.
+---
 
-## What PR Firewall does
+## The PR Firewall Dashboard
 
-For each pull request, CyBox evaluates the risk introduced by that change and returns a verdict:
+Navigate to **PR Firewall** in the sidebar to see a live summary of all evaluated pull requests across your organization.
 
-| Verdict | Meaning |
-|---|---|
-| **Allow** | The pull request can move forward |
-| **Warn** | The pull request should be reviewed carefully before merge |
-| **Block** | The pull request introduces risk that should be fixed before merge |
+The dashboard shows:
 
-## Why that matters
+- **Blocked** — PRs that matched a Block rule and were prevented from merging
+- **Warned** — PRs that matched a Warn rule, flagged for review but not blocked
+- **Allowed** — PRs that passed all rules cleanly
+- **Repos with issues** — number of repositories with at least one blocked or warned PR
 
-PR Firewall helps teams answer three important questions fast:
+Each row in the table shows the PR title, provider, asset, author, verdict, the rule that matched, risk level, finding count, and when it was evaluated.
 
-1. **Did this PR introduce meaningful risk?**
-2. **Is the risk severe enough to stop merge?**
-3. **What exactly needs to be fixed?**
+---
 
-## What CyBox evaluates
+## How Verdicts Work
 
-PR Firewall is designed to focus on issues introduced by the pull request, so teams do not get blocked by old baseline problems that already existed.
+Rules are evaluated **top to bottom**. The first rule that matches determines the verdict. If no rule matches, the PR is **Allowed** by default.
 
-That keeps reviews practical and reduces friction.
+| Verdict | Outcome | GitHub Check |
+|---------|---------|-------------|
+| ✅ **Allow** | PR passes — no action required | Passes |
+| ⚠️ **Warn** | PR is flagged — developer is notified but can still merge | Passes with warning |
+| 🚫 **Block** | PR is blocked — cannot merge until resolved or overridden | Fails |
 
-## AI-aware review context
+<Note>
+If the CyBox scan itself fails (timeout, infrastructure error), a neutral check is posted and the PR is **not** blocked. A scan failure never counts as a security verdict.
+</Note>
 
-CyBox can surface signals that a pull request may have been created or heavily influenced by AI tooling.
+---
 
-That context helps teams understand where additional scrutiny may be useful, while verdicts remain grounded in the risk actually found.
+## Firewall Rules
 
-## Typical rollout
+Rules define **when** to apply a verdict and **what** verdict to apply. Go to **PR Firewall → Firewall Rules** to view, create, reorder, and manage your rules.
 
-<Steps>
-  <Step title="Install GitHub integration">
-    Connect the repository through the CyBox GitHub integration.
-  </Step>
-  <Step title="Review baseline findings">
-    Understand the current state of the repository so old issues do not confuse rollout.
-  </Step>
-  <Step title="Enable branch protection">
-    Require the CyBox check if you want Block verdicts to stop merge in GitHub.
-  </Step>
-  <Step title="Monitor and tune">
-    Review verdict trends, override cases, and team feedback as usage grows.
-  </Step>
-</Steps>
+Rules are evaluated **top to bottom — first match wins**. Use the drag handle on each row to change priority order.
 
-## What teams see in CyBox
+### Rule Fields
 
-In the PR Firewall view, teams can review:
+Each rule has the following fields:
 
-- Pull request verdict
-- Introduced findings
-- Severity distribution
-- Linked repository and PR
-- Review history and decision context
+**Name** — A descriptive label shown in the PR Firewall table (e.g. "Block auth changes", "Secret detected").
 
-## Good use cases
+**Developer Message** — The message shown directly in the GitHub PR review when this rule matches. Keep it actionable (e.g. "Protected authentication area — security review required").
 
-- Preventing new secrets from being merged
-- Catching risky auth or permission changes before release
-- Highlighting dangerous dependency or infrastructure changes in the PR itself
-- Adding governance without forcing teams into a separate workflow
+**Status** — Toggle a rule on or off without deleting it.
+
+**Scope (Repositories)** — Which repositories this rule applies to. Defaults to all connected repositories. You can scope a rule to specific repos.
+
+---
+
+### Conditions (WHEN)
+
+Conditions define what must be true about a PR for the rule to match. All conditions in a rule must match (AND logic). Multiple values within a single condition use OR logic.
+
+Click **+ Add condition** to add one or more of the following:
+
+<AccordionGroup>
+  <Accordion title="Path">
+    Match PRs that include changes to files under a specific path pattern.
+
+    **Operator:** `matches`
+    **Value:** A path glob pattern — e.g. `/auth/**`, `/api/**`, `src/payments/**`
+
+    Use this to protect sensitive directories. For example, a rule with `path: /auth/**` will trigger whenever any file under the `auth/` directory is modified in the PR.
+
+    **Example use cases:**
+    - Block changes to `/auth/**` — require security review for authentication code
+    - Warn on changes to `/config/**` — flag configuration file modifications
+    - Block changes to `/migrations/**` — protect database migration files
+  </Accordion>
+
+  <Accordion title="File">
+    Match PRs that include changes to a specific file or file pattern.
+
+    **Operator:** `matches`
+    **Value:** A filename or glob — e.g. `*.env`, `secrets.json`, `Dockerfile`
+
+    More granular than Path — targets specific files rather than directories.
+
+    **Example use cases:**
+    - Block changes to `.env` files
+    - Warn on changes to `package-lock.json` or `yarn.lock`
+  </Accordion>
+
+  <Accordion title="Code Area">
+    Match PRs based on the functional area of code being changed — detected automatically by CyBox.
+
+    **Values:** `infrastructure`, `authentication`, `payments`, `database`, and others.
+
+    CyBox classifies code areas from the diff — you don't need to specify paths manually.
+
+    **Example use cases:**
+    - Warn on any PR touching infrastructure code
+    - Block PRs that modify payment processing logic
+  </Accordion>
+
+  <Accordion title="Severity">
+    Match PRs where CyBox detected findings at or above a specific severity level.
+
+    **Values:** Critical, High, Medium, Low
+
+    Combine with a Block action to gate on finding severity — e.g. block any PR introducing a Critical finding.
+
+    **Example use cases:**
+    - Block PRs with Critical or High findings
+    - Warn on PRs with Medium findings
+  </Accordion>
+
+  <Accordion title="AI Involvement">
+    Match PRs where CyBox detected AI tool involvement in the code generation.
+
+    **Values:** `present` / `not present`
+
+    CyBox detects AI involvement from: Copilot co-author commit metadata, Cursor/Claude/Windsurf config files in the repo, AI-assisted PR labels, and bot-authored PRs from tools like v0, Lovable, Bolt, and Devin.
+
+    **Example use cases:**
+    - Warn on all AI-generated PRs to ensure human review
+    - Block AI-generated PRs that also have High severity findings (combine with Severity condition)
+  </Accordion>
+
+  <Accordion title="Secret Detected">
+    Match PRs where CyBox's secrets scanner (Gitleaks) found an exposed credential, API key, or token.
+
+    **Values:** `Yes` / `No`
+
+    **Example use cases:**
+    - Block any PR where a secret was detected — this is the most critical rule to have enabled
+  </Accordion>
+
+  <Accordion title="Trust Boundary Risk">
+    Match PRs where CyBox detected a trust boundary violation — code changes that cross security zones (e.g. user input flowing to privileged operations without validation).
+
+    **Values:** `Yes` / `No`
+
+    **Example use cases:**
+    - Block PRs with trust boundary risk
+    - Warn and require security team review
+  </Accordion>
+
+  <Accordion title="Dependency Change Risk">
+    Match PRs that introduce changes to dependencies — new packages, version upgrades, or removals.
+
+    **Values:** `Yes` / `No`
+
+    Use this to enforce review of any supply chain changes introduced by a PR.
+
+    **Example use cases:**
+    - Warn on all PRs that modify `package.json`, `requirements.txt`, or `go.mod`
+    - Block PRs that add new dependencies with known vulnerabilities
+  </Accordion>
+
+  <Accordion title="Documentation-only PR">
+    Match PRs where all changes are limited to documentation files (`.md`, `.mdx`, `.txt`, etc.) with no code changes.
+
+    **Values:** `Yes` / `No`
+
+    Use this to fast-track or exempt docs-only PRs from stricter security rules.
+
+    **Example use cases:**
+    - Allow docs-only PRs without triggering Block rules
+    - Apply a Warn verdict to docs PRs as a lightweight acknowledgment
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Actions (THEN)
+
+Once conditions match, the rule applies one of three actions:
+
+| Action | Effect |
+|--------|--------|
+| **Allow** | PR passes — explicitly allow this class of PRs even if other rules would block |
+| **Warn** | Post a warning on the PR — visible to the author but does not block merge |
+| **Block** | Fail the GitHub Check — PR cannot merge until resolved or overridden by a repo admin |
+
+---
+
+## Creating a Rule
+
+1. Go to **PR Firewall → Firewall Rules**
+2. Click **+ Add Rule**
+3. Enter a **Name** and **Developer Message**
+4. Set the **Scope** — which repositories this rule applies to
+5. Add one or more **Conditions** using the **+ Add condition** menu
+6. Select the **Action** — Allow, Warn, or Block
+7. Save the rule
+
+The rule is immediately active (unless toggled off) and will apply to all new PRs.
+
+---
+
+## Rule Priority
+
+Rules are evaluated top to bottom — **the first matching rule wins**. Rules below the first match are not evaluated.
+
+To change priority, drag the grip icon (⠿) on the left of each rule row to reorder.
+
+**Best practice ordering:**
+1. Explicit Allow rules first (e.g. docs-only PRs)
+2. High-priority Block rules (secrets, auth paths)
+3. Broad Warn rules (AI involvement, dependency changes)
+4. Catch-all rules last
+
+---
+
+## Example Rules
+
+Here are common rule configurations to get started:
+
+| Rule Name | Condition | Action | Developer Message |
+|-----------|-----------|--------|-------------------|
+| Block secrets | Secret detected: Yes | **Block** | Secret or credential detected in this PR |
+| Block auth changes | Path: `/auth/**` | **Block** | Protected authentication area — security review required |
+| Warn on AI code | AI involvement: present | **Warn** | AI-generated code detected — please review carefully |
+| Warn on infra changes | Code area: infrastructure | **Warn** | Infrastructure changes detected |
+| Warn on dependency changes | Dependency change risk: Yes | **Warn** | Dependency changes introduced — verify supply chain |
+| Allow docs-only | Documentation-only PR: Yes | **Allow** | Documentation changes only — no review needed |
+
+---
+
+## Setup
+
+### 1. Install the CyBox GitHub App
+
+See [GitHub Integration](/integrations/github) for full instructions.
+
+### 2. Enable Branch Protection
+
+For Block verdicts to prevent merging, enable branch protection in GitHub:
+
+1. Go to your repo → **Settings → Branches**
+2. Add a rule for your default branch (e.g. `main`)
+3. Enable **Require status checks to pass before merging**
+4. Select **CyBox Security Scan** from the status checks list
+
+### 3. Configure Your Rules
+
+Go to **PR Firewall → Firewall Rules → + Add Rule** and set up the rules that match your team's security policy.
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I override a Block verdict?">
+    Yes. GitHub repository admins can bypass branch protection rules and force-merge a blocked PR. CyBox logs the verdict — the override decision is yours.
+  </Accordion>
+  <Accordion title="What if no rules match?">
+    If no rule matches, the PR is **Allowed** by default. The GitHub Check passes and no action is taken.
+  </Accordion>
+  <Accordion title="Does PR Firewall scan the full repo or just the diff?">
+    Conditions based on findings (Severity, Secret detected) evaluate **introduced findings only** — those mapped to the PR diff. Conditions like Path and File match against the changed files in the PR regardless of findings.
+  </Accordion>
+  <Accordion title="What happens if CyBox is down?">
+    If the check doesn't complete, GitHub shows it as pending. If branch protection requires it, the PR stays blocked until the check completes or an admin overrides.
+  </Accordion>
+</AccordionGroup>
