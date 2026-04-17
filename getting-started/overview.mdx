@@ -1,49 +1,53 @@
 ---
-title: "Welcome to CyBox"
-description: "The security control layer for AI-generated code — discover vulnerabilities, fix them automatically, and block risky code before it reaches production."
+title: "Welcome to CyBox Security"
+description: "The control layer for AI-generated code, risky pull request changes, and hidden software exposure."
 ---
 
-CyBox helps engineering and security teams **stay in control of what AI coding tools produce** — finding vulnerabilities, fixing them automatically, and blocking risky code before it reaches production.
+CyBox gives security and engineering teams control over what AI-driven development produces — before risky changes reach production.
 
 <CardGroup cols={2}>
   <Card title="Quickstart" icon="rocket" href="/getting-started/quickstart">
-    Connect your first repo and run a scan in minutes.
+    Connect your first asset and see results in minutes.
   </Card>
   <Card title="PR Firewall" icon="shield" href="/features/pr-firewall">
-    Block risky AI-generated code before it merges.
+    Review, warn on, or block risky changes before they merge.
   </Card>
   <Card title="Shadow Apps" icon="eye" href="/features/shadow-apps">
-    Discover deployed apps your team may not know about.
+    Discover apps and assets your team may not know are exposed.
   </Card>
   <Card title="AutoFix" icon="wrench" href="/features/autofix">
-    Auto-generate fix PRs for detected vulnerabilities.
+    Turn eligible findings into fix pull requests without leaving the workflow.
   </Card>
 </CardGroup>
 
-## What CyBox Does
+## What CyBox does
 
-CyBox is a **Virtual Security Team for the AI Era**. It sits between your AI coding tools and your production environment, giving you continuous visibility and control over what gets built and deployed.
+CyBox is the control layer between AI-assisted development and production.
 
-### The Problem
+It is built for teams where AI tools are writing code, deploying apps, and moving faster than traditional security review can keep up with.
 
-AI coding assistants (Copilot, Cursor, Claude, v0, Lovable, Bolt) generate code fast — but they also introduce vulnerabilities fast. Traditional scanners were not built for this pace or this pattern.
+### The control gap
 
-### The CyBox Approach
+AI now writes, edits, and helps ship software alongside developers — producing code, applications, and external assets faster than most security programs were built to govern.
+
+The result is a new kind of risk: code no one fully reviewed, services no one approved, and exposure no one can clearly see. CyBox closes that gap before it becomes a production problem.
+
+### How CyBox works
 
 <Steps>
   <Step title="Discover">
-    Connect your GitHub repositories and deployed web assets. CyBox automatically inventories everything — code, dependencies, secrets, infrastructure, and live URLs.
+    Connect your repositories and deployed web assets. CyBox builds a continuous inventory of what your organization has — code, dependencies, secrets, infrastructure definitions, and live internet-facing surfaces.
   </Step>
-  <Step title="Detect">
-    Every push and PR is scanned across six scanner types: SAST, SCA, Secrets, IaC, License, and DAST. Findings are deduplicated, prioritized, and mapped to the diff that introduced them.
+  <Step title="Validate">
+    CyBox scans connected assets and tests live web surfaces to understand what is actually exposed, what matters most, and where real business risk is building.
   </Step>
-  <Step title="Act">
-    CyBox generates fix PRs via AutoFix, enforces security gates via PR Firewall, and surfaces live vulnerabilities via DAST — so your team can act, not just review reports.
+  <Step title="Control">
+    Review, warn on, and block risky changes at the pull request level before they ship. Use guided remediation and AutoFix to move from finding to resolution without creating more manual work.
   </Step>
 </Steps>
 
-## Who CyBox Is For
+## Who CyBox is for
 
-- **Engineering teams** building with AI coding tools who need automated security coverage without slowing down
-- **Security leads** who need visibility into AI-generated code risk across the org
-- **CTOs and founders** who need to ship fast without introducing silent risk
+- **Security teams** that need a control point over AI-driven development without slowing engineering down
+- **Engineering leaders** who need to ship fast and stay accountable for what gets deployed
+- **Organizations** adopting AI development tools that want visibility before exposure becomes a problem

@@ -23,13 +23,13 @@ CyBox is designed to minimize code persistence during scanning.
     Repository data is used for scanning workflows and is not intended to become long-term product content. Teams primarily work from findings, metadata, and review results.
   </Accordion>
   <Accordion title="Findings data">
-    Findings include the context needed to understand and remediate an issue, such as location, severity, evidence, and status.
+    Findings include the context needed to understand and remediate an issue — location, severity, evidence, and status.
   </Accordion>
   <Accordion title="Secrets exposure">
-    When secrets are detected, CyBox should preserve only the minimum evidence needed for triage and verification.
+    When credentials are detected, CyBox preserves only the minimum evidence needed for triage and verification. Full secret values are not stored.
   </Accordion>
   <Accordion title="Access tokens">
-    Connected integration credentials should be scoped to the minimum access required for the feature being used.
+    Connected integration credentials are scoped to the minimum access required for the feature being used.
   </Accordion>
 </AccordionGroup>
 

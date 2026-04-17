@@ -5,38 +5,38 @@ description: "CyBox is the control layer for AI-generated code, risky pull reque
 
 # What is CyBox?
 
-CyBox helps teams detect risk, move faster on remediation, and stop dangerous changes before they reach production.
+CyBox is the control layer between AI-driven development and production.
 
 ## The simple answer
 
-CyBox is a **security control layer for AI-generated code and fast-moving software exposure**.
+AI now writes, edits, and helps ship software alongside developers — producing code, applications, and external assets faster than most security programs were built to govern.
 
-It is built for teams shipping with AI tools, modern deployment platforms, and rapid pull request cycles.
+CyBox gives security teams a decision point before risky changes and hidden exposure become production problems.
 
 ## Why teams need it
 
-AI has changed how software gets built:
+Speed is valuable. But it creates a control problem.
 
-- More code is produced faster
-- More changes reach pull requests with less review time
-- More apps and preview environments go live outside formal security processes
+- More code is produced faster, with less individual review
+- More changes reach pull requests before security has context
+- More apps and deployments go live outside formal oversight
 
-That speed is valuable, but it also creates a control problem.
+CyBox is built to handle that pace — not slow it down.
 
 ## What CyBox covers
 
 <CardGroup cols={2}>
   <Card title="Repository risk" icon="code">
-    Scan source code, dependencies, secrets, and infrastructure definitions.
+    Scan source code, dependencies, credentials, and infrastructure definitions for introduced risk.
   </Card>
   <Card title="Merge-time governance" icon="shield-check">
-    Evaluate introduced risk in each pull request with PR Firewall.
+    Evaluate the risk of each pull request and enforce decisions before risky changes ship.
   </Card>
   <Card title="Live exposure" icon="globe">
-    Test public web assets and validate what is actually exposed.
+    Test public web assets and validate what is actually reachable from the internet.
   </Card>
   <Card title="Faster remediation" icon="wrench">
-    Guide teams from finding to fix with evidence and AutoFix where supported.
+    Guide teams from finding to resolution with clear evidence and AutoFix where supported.
   </Card>
 </CardGroup>
 
@@ -44,7 +44,7 @@ That speed is valuable, but it also creates a control problem.
 
 | Traditional tools | CyBox |
 |---|---|
-| Produce long finding lists | Help teams prioritize what matters now |
+| Produce long finding lists | Help teams focus on what matters now |
 | Focus mostly on code | Cover code, pull requests, and live assets |
 | Stop at reporting | Support remediation and merge-time enforcement |
 | Struggle with AI-paced delivery | Built for AI-assisted development |

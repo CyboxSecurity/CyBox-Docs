@@ -5,7 +5,7 @@ description: "How CyBox moves from connected assets to findings, decisions, and 
 
 # How CyBox works
 
-CyBox follows a simple operating flow: connect assets, scan for risk, prioritize findings, and enforce decisions where code gets merged.
+CyBox follows a clear operating flow: connect assets, scan for risk, prioritize findings, and enforce decisions where code gets merged.
 
 ## End-to-end flow
 
@@ -23,27 +23,27 @@ Teams remediate manually or with AutoFix
 
 ## 1. Assets are connected
 
-CyBox can work with repositories and public web assets.
+CyBox works with repositories and public web assets.
 
 Typical starting point:
 
-- One or more GitHub repositories
+- One or more connected GitHub repositories
 - One public website, preview deployment, or domain
 
 ## 2. Scans run
 
-CyBox scans for:
+CyBox reviews connected assets for:
 
-- Code issues
+- Code vulnerabilities and insecure patterns
 - Dependency risk
-- Secrets exposure
+- Exposed credentials and secrets
 - Infrastructure misconfigurations
 - License risk
-- Live internet-facing issues on web assets
+- Live internet-facing exposure on web assets
 
 ## 3. Findings are normalized
 
-CyBox groups repeated detections so the same issue is not treated as brand new on every scan.
+CyBox groups repeated detections so the same issue is not treated as new on every scan.
 
 Each finding keeps the context teams need to act:
 
@@ -56,7 +56,7 @@ Each finding keeps the context teams need to act:
 
 ## 4. PR Firewall makes merge-time decisions
 
-For pull requests, CyBox focuses on **introduced findings** rather than historic issues already sitting in the codebase.
+For pull requests, CyBox focuses on **introduced risk** rather than historic issues already sitting in the codebase.
 
 That lets teams answer the most important question quickly:
 
