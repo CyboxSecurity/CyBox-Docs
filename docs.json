@@ -50,7 +50,10 @@
         "pages": [
           "platform/what-is-cybox",
           "platform/how-cybox-works",
-          "platform/security-model"
+          "platform/security-model",
+          "platform/assets",
+          "platform/organization-settings",
+          "platform/account-settings"
         ]
       },
       {
@@ -60,7 +63,8 @@
           "features/shadow-apps",
           "features/findings-and-posture",
           "features/autofix",
-          "features/live-exposure-validation"
+          "features/live-exposure-validation",
+          "platform/reports"
         ]
       },
       {

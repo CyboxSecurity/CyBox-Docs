@@ -1,0 +1,78 @@
+---
+title: "Organization Settings"
+description: "Configure your CyBox organization — branding, team members, scan frequency, and access controls."
+---
+
+## Overview
+
+Organization settings control how your CyBox workspace is configured. Go to **Organization settings** in the sidebar to manage these options.
+
+Settings are organized across four tabs: **General**, **Members**, **Scanning**, and **Danger zone**.
+
+---
+
+## General
+
+Configure the basics of your organization.
+
+| Setting | What it controls |
+|---------|-----------------|
+| **Organization logo** | The logo shown in your CyBox workspace |
+| **Organization name** | The display name for your organization |
+
+Changes are saved individually using the **Save** button next to each field.
+
+---
+
+## Members
+
+Manage who has access to your CyBox organization.
+
+### Inviting a member
+
+1. Enter the teammate's email address
+2. Select a role
+3. Click **Invite**
+
+The invitee receives an email with a link to join the organization.
+
+### Roles
+
+| Role | Access |
+|------|--------|
+| **Owner** | Full access — billing, settings, integrations, all assets |
+| **Admin** | Manage assets, scans, and team members. No billing access |
+| **Member** | Review findings, trigger scans, use AutoFix |
+| **Viewer** | Read-only access to findings and the dashboard |
+
+### Managing existing members
+
+Active members appear in the **Active members** tab. Pending invites that have not yet been accepted appear in **Pending invitations**.
+
+---
+
+## Scanning
+
+Control how often CyBox automatically scans your active assets.
+
+| Frequency | Schedule |
+|-----------|----------|
+| **Daily** | Every 24 hours |
+| **Every 3 days** | Every 72 hours |
+| **Weekly** | Every 7 days |
+
+The **Next Scheduled Scan** section shows the upcoming scan time for each active asset. Assets without an active schedule show as **Not scheduled**.
+
+<Note>
+Scan frequency applies to scheduled background scans. PR Firewall scans and manual scans are not affected by this setting — they run immediately when triggered.
+</Note>
+
+---
+
+## Danger zone
+
+The Danger zone contains destructive actions that cannot be undone. These actions require explicit confirmation before proceeding.
+
+<Warning>
+Actions in the Danger zone are permanent. Review carefully before proceeding.
+</Warning>

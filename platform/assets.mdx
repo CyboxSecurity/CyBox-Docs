@@ -1,0 +1,73 @@
+---
+title: "Assets"
+description: "Assets are the repositories, websites, and deployed services CyBox scans and monitors on your behalf."
+---
+
+## Overview
+
+Assets are the units of work in CyBox. Everything CyBox scans, monitors, and reports on is tied to an asset. Go to **Assets** in the sidebar to manage your full inventory.
+
+---
+
+## Asset types
+
+| Type | What it covers |
+|------|----------------|
+| **Repository** | A connected GitHub repository. CyBox scans the code, dependencies, credentials, and infrastructure definitions it contains. |
+| **Website** | A public URL or domain added manually. CyBox tests it for live exposure. |
+| **Service** | A deployed service discovered via a connected platform such as Render or Vercel. |
+| **Project** | A project-level deployment unit from a connected platform. |
+
+---
+
+## Asset status
+
+Each asset shows a status that reflects its current scan state:
+
+| Status | Meaning |
+|--------|---------|
+| **Active** | Scanning is enabled and the asset is included in scheduled scans |
+| **Inactive** | The asset exists in inventory but is not being actively scanned |
+| **Never scanned** | The asset has been added but no scan has run yet |
+
+Use the toggle on each asset row to enable or disable active scanning.
+
+---
+
+## Adding an asset
+
+1. Go to **Assets**
+2. Click **+ Add Asset**
+3. Choose the asset type — Repository or Website
+4. For repositories: select from your connected GitHub installation
+5. For websites: enter the public URL
+6. Save — CyBox will queue an initial scan automatically
+
+---
+
+## Asset sources
+
+Assets can come from two places:
+
+- **Manual** — added directly by your team
+- **Auto-discovered** — pulled in from a connected deployment platform such as Vercel or Render
+
+Auto-discovered assets appear with their source platform tagged. They update automatically as your connected platforms sync.
+
+---
+
+## Managing assets
+
+From the Assets list you can:
+
+- **Search** by name
+- **Filter** by type — Repos, Websites, or Active only
+- **Sort** by name, type, status, last scan date, or active state
+- **Trigger a scan** — open an asset and click **Scan Now**
+- **Deactivate** — toggle off assets you want to keep in inventory without scanning
+
+---
+
+## Good practice
+
+Start with your most business-critical assets. A focused inventory of five well-monitored assets is more useful than a large inventory with scattered attention. Expand as your team builds confidence in the workflow.
