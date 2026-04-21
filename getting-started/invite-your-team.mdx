@@ -9,29 +9,47 @@ CyBox works best when security and engineering can look at the same findings and
 
 ## Invite a teammate
 
-1. Open **Settings → Team**
+1. Open **Organization Settings → Members**
 2. Click **Invite Member**
 3. Enter the teammate's email address
 4. Choose a role
 5. Send the invite
 
-## Recommended roles
+The teammate receives an email with a link to join. Once they accept, they land directly in your workspace.
 
-| Role | Best for |
-|------|----------|
-| **Owner** | Organization setup, billing, integrations, and full control |
-| **Admin** | Day-to-day management of assets, scans, and members |
-| **Member** | Engineers and security users who review findings and use AutoFix |
-| **Viewer** | Stakeholders who need read-only visibility |
+## Roles
+
+CyBox has three roles: **Owner**, **Admin**, and **Member**.
+
+| Action | Member | Admin | Owner |
+|--------|--------|-------|-------|
+| View dashboards, findings, and assets | ✓ | ✓ | ✓ |
+| Use AutoFix and CyBot AI | ✓ | ✓ | ✓ |
+| Invite team members | — | ✓ | ✓ |
+| Change scan frequency | — | ✓ | ✓ |
+| Rename the workspace | — | ✓ | ✓ |
+| Remove members | — | ✓ | ✓ |
+| Delete the workspace | — | — | ✓ |
+
+### Owner
+
+Full control over the workspace. The person who sets up the organization is automatically the Owner. There can only be one Owner — to transfer ownership, the current Owner must assign the role to another member first.
+
+### Admin
+
+Can manage the team and configure the workspace — inviting members, changing scan frequency, and renaming the organization. Cannot delete the workspace or transfer ownership.
+
+### Member
+
+Can view all security data, use AutoFix, and interact with CyBot AI. Cannot change any organization settings or invite others. The right role for engineers and security reviewers.
 
 ## Rollout tip
 
-A simple first setup is:
+A simple first setup:
 
-- 1 Owner
-- 1 to 2 Admins
-- Engineers as Members
-- Leadership as Viewers
+- 1 Owner — the security lead or team manager
+- 1 to 2 Admins — engineers who need to manage settings
+- Everyone else as Members
 
 ## Identity and access
 
@@ -39,4 +57,4 @@ For advanced identity requirements such as SSO, domain-based access control, or 
 
 ## Organization settings
 
-For more organization-level configuration — scan frequency, logo, and access controls — go to [Organization Settings](/platform/organization-settings).
+For organization-level configuration — scan frequency, workspace name, and logo — go to **Organization Settings → General**.
