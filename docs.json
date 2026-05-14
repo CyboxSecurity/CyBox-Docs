@@ -53,6 +53,7 @@
           "platform/security-model",
           "platform/assets",
           "platform/organization-settings",
+          "platform/organization-settings/ai-providers",
           "platform/account-settings"
         ]
       },
