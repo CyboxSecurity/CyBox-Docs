@@ -18,12 +18,12 @@
   },
   "topbarLinks": [
     {
-      "name": "cybox.ai",
+      "name": "Back to cybox.ai",
       "url": "https://cybox.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
+    "name": "Open Dashboard",
     "url": "https://app.cybox.ai"
   },
   "anchors": [
@@ -52,7 +52,11 @@
       "pages": [
         "platform/what-is-cybox",
         "platform/how-cybox-works",
-        "platform/security-model"
+        "platform/security-model",
+        "platform/assets",
+        "platform/organization-settings",
+        "platform/organization-settings/ai-providers",
+        "platform/account-settings"
       ]
     },
     {
@@ -62,7 +66,8 @@
         "features/shadow-apps",
         "features/findings-and-posture",
         "features/autofix",
-        "features/live-exposure-validation"
+        "features/live-exposure-validation",
+        "platform/reports"
       ]
     },
     {
@@ -79,8 +84,12 @@
     {
       "group": "Integrations",
       "pages": [
+        "integrations/overview",
         "integrations/github",
-        "integrations/domain-monitoring"
+        "integrations/domain-monitoring",
+        "integrations/lovable",
+        "integrations/bolt",
+        "integrations/base44"
       ]
     },
     {
