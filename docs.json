@@ -16,14 +16,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Back to cybox.ai",
-        "href": "https://cybox.ai"
+        "label": "Open Dashboard",
+        "href": "https://app.cybox.ai"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Open Dashboard",
-      "href": "https://app.cybox.ai"
+      "label": "Back to cybox.ai",
+      "href": "https://cybox.ai"
     }
   },
   "anchors": [
