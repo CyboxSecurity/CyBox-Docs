@@ -15,8 +15,12 @@
   "favicon": "/favicon.png",
   "topbarLinks": [
     {
-      "name": "cybox.ai",
+      "name": "← cybox.ai",
       "url": "https://cybox.ai"
+    },
+    {
+      "name": "Dashboard",
+      "url": "https://app.cybox.ai"
     }
   ],
   "topbarCtaButton": {
