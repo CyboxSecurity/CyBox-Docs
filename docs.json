@@ -5,7 +5,7 @@
   "colors": {
     "primary": "#3C83F6",
     "light": "#3C83F6",
-    "dark": "#020617"
+    "dark": "#3C83F6"
   },
   "logo": {
     "dark": "/logo/dark.png",
@@ -23,8 +23,7 @@
     "primary": {
       "type": "button",
       "label": "Open Dashboard",
-      "href": "https://app.cybox.ai",
-      "style": "fill"
+      "href": "https://app.cybox.ai"
     }
   },
   "anchors": [
