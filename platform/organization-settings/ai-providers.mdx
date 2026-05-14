@@ -1,0 +1,48 @@
+---
+title: "AI Providers"
+description: "Connect your organization's Anthropic API key to enable AI-powered features including AutoFix."
+---
+
+# AI Providers
+
+CyBox uses your organization's Anthropic API key to power AI features including AutoFix (SAST + IaC). Your key is stored encrypted and used only on behalf of your organization.
+
+## Connecting your Anthropic API key
+
+Only organization **owners** and **admins** can add or rotate API keys.
+
+1. Go to **Organization Settings → AI Providers**
+2. Click **Add Anthropic API key**
+3. Paste your key — it must start with `sk-ant-`
+4. CyBox validates the key against Anthropic before saving
+5. Click **Save**
+
+Once saved, AutoFix is enabled for all members of your organization.
+
+## Security
+
+- Keys are encrypted at rest using AES-256-GCM
+- The plaintext key is never returned after saving — not even to admins
+- Each organization has its own isolated key — no cross-tenant access
+- You can rotate or delete the key at any time
+
+## Key lifecycle
+
+| Action | Who can perform it |
+|--------|-------------------|
+| Add key | Owner, Admin |
+| Rotate key | Owner, Admin |
+| Delete key | Owner, Admin |
+| Use key (AutoFix) | All members |
+
+## Rotating your key
+
+Click **Rotate** on the AI Providers settings page, paste the new key, and save. The old key is immediately replaced.
+
+## Removing your key
+
+Click **Delete** to remove the key. AutoFix will be disabled for your organization until a new key is added.
+
+<Warning>
+Only test assets your team owns or is explicitly authorized to assess. Your organization is billed directly by Anthropic for usage on this key.
+</Warning>
