@@ -18,12 +18,12 @@
   },
   "topbarLinks": [
     {
-      "name": "Open Dashboard",
+      "name": "Login",
       "url": "https://app.cybox.ai"
     }
   ],
   "topbarCtaButton": {
-    "name": "Back to cybox.ai",
+    "name": "www.cybox.ai",
     "url": "https://cybox.ai"
   },
   "anchors": [
