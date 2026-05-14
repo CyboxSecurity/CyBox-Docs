@@ -38,6 +38,11 @@
       "url": "mailto:support@cybox.ai"
     }
   ],
+  "integrations": {
+    "clarity": {
+      "projectId": "wqdax6r0gr"
+    }
+  },
   "navigation": {
     "groups": [
       {
